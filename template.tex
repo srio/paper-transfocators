@@ -43,7 +43,7 @@
      % The title of the paper. Use \shorttitle to indicate an abbreviated title
      % for use in running heads (you will need to uncomment it).
 
-\title{Pairing transfocators in undulator beamlines for low-emittance storage rings}
+\title{Pairing transfocators in undulator beamlines at low-emittance storage rings}
 %\shorttitle{Short Title}
 
      % Authors' names and addresses. Use \cauthor for the main (contact) author.
@@ -52,9 +52,10 @@
      % affiliations; if there is only one affiliation address, remove the [a].
 
 \cauthor[a]{Manuel}{Sanchez del Rio}{srio@esrf.eu}{address if different from \aff}
-\author[a]{Marco}{Cammarata}
 \author[a]{Rafael}{Celestre}
 \author[a]{Juan}{Reyes-Herrera}
+\author[a]{Philipp}{Brumund}
+\author[a]{Marco}{Cammarata}
 
 \aff[a]{European Synchrotron Radiation Facility, 71 Avenue des Martyrs, 38000 Grenoble \country{France}}
 % \aff[b]{Second affiliation address}
@@ -259,13 +260,13 @@ Suppose an aperture placed between the source and the lens, at a distance $p_a$ 
 
 % Let us consider the simplified case of a fully coherent and monochromatic source with photon wavelength $\lambda$. The intensity at the source plane can be modelled by a Gaussian distribution of  root mean square (RMS) $\sigma_s$. A lens is placed at a distance $p$ from the source. An aperture is placed upstream from the lens at a distance $p_a$ from the lens. If the far-field approximation holds, the beam at the slit plane will have a Gaussian intensity distribution with $\sigma_a=(p-p_a) \lambda /(4 \pi  \sigma_s)$. With the slit fully opened, the ideal lens focuses the Gaussian beam into an image whose size $\sigma_i$ and position $q$ are given by the geometrical optics. When the slit is closed, it crops the beam producing diffraction effects that will affect both the position and size of the focus. 
 
-We calculated the beam evolution using wave optics. The source is an undulator with parameters described in Table XX tuned at $E$=7~keV, and we suppose zero emittance (full coherence). An Be lens of radius $R$=\SI{0.2}{\milli\meter} is placed $p=$\SI{65}{\meter}, and a slit of variable aperture $a$ is placed at $p_a$=\SI{29}{\meter} from the lens. The beam at the slit plane has a $FWHM=$\SI{565}{\micro\meter} and the aperture is open at $a = n \times FWHM$ with different values of $n$ covering from fully opening to a very narrow aperture. The refracted beam is analyzed at different positions from the lens by calculating i) the full-width at half-maximum (FWHM) of the intensity distribution, and ii) the on-axis intensity $I_{axis}$. At the focal position, the FWHM should present a minimum and $I_{axis}$ a maximum. 
+We calculated the beam evolution using wave optics. The source is an undulator with parameters described in Table XX tuned at $E$=7~keV, and we suppose zero emittance (full coherence). A Be lens of radius $R$=\SI{0.2}{\milli\meter} is placed $p=$\SI{65}{\meter}, and a slit of variable aperture $a$ is placed at $p_a$=\SI{29}{\meter} from the lens. The beam at the slit plane has a $FWHM=$\SI{565}{\micro\meter} and the aperture is open at $a = n \times FWHM$ with different values of $n$ covering from fully opening to a very narrow aperture. The refracted beam is analyzed at different positions from the lens by calculating i) the full-width at half-maximum (FWHM) of the intensity distribution, and ii) the on-axis intensity $I_{axis}$. At the focal position, the FWHM should present a minimum and $I_{axis}$ a maximum. 
 
 \begin{figure}
     \centering
     % \includegraphics[width=0.95\textwidth]{figures/oneTFund_400um.eps}
     % \includegraphics[width=0.95\textwidth]{figures/oneTFund_300um.png}  
-    \includegraphics[width=0.95\textwidth]{figures/oneTFund_200um.eps}
+    \includegraphics[width=0.95\textwidth]{figures/oneTF_UndSource_RectSlit_R200um.eps}
     %     \includegraphics[width=0.95\textwidth]{figures/oneTFundGSM_200um.eps}
     % \includegraphics[width=0.95\textwidth]{figures/oneTFundHYBRID_200um.eps}
     % \includegraphics[width=0.95\textwidth]{figures/oneTFund_100um.png}
@@ -284,12 +285,16 @@ If the lens focal distance is reduced (using lenses with smaller radius, or pili
 
 The dimension of the waist can be calculated using geometrical concepts only for the limiting cases of waist at $q$ and $q_a$. Here, for the waist at $q$, the beam size is the source size times the magnification (distance lens-waist over distance lens-source) and for the waist at $q_a$, the beam size is the slit aperture times the magnification (distance lens-waist over distance slit-lens). This has been verified numerically (not shown). However, for intermediate slit apertures, where the waist position is in between $q$ and $q_a$, the waist size is different to that predicted by geometric optics. Moreover, it interesting to observe that for these intermediate slit apertures that crop the beam, the waist is larger than those found at limiting positions $p$ and $p_a$.
 
-The calculation shown in Figure~\ref{fig:sizes} refers for the zero emittance case (complete coherence, or CF=1). When the EBS emittance values are considered, a coherent mode decomposition of the undulator source is required to include the partial coherent effects. This is done for the horizontal and vertical directions, resulting a CF (at 7 keV) of 0.13 and 0.58, respectively. These values are much higher than for the old ESRF-1 source, but still low for approximating the beam by a coherent source. Therefore, we propagated a number of modes large enough to contain more than 99\% of the source intensity (36 modes in H and 8 in V). The illumination at the entrance slit plane is \SI{610}{\micro\meter} in H times \SI{566}{\micro\meter} in V. The slit aperture is used to tune the coherence of the beam: closing the slit reduces the CF. In the limit (zero aperture) the beam after the slit is fully coherent (CF=1), but obviously with zero intensity. The choice of the right slit aperture comes from a compromise between coherence and flux. The Figure~\ref{fig:oneTFund} shows the CF after of the H and V 1D beams after the slit for different slit apertures. 
 
-\todo{To compare the coherent case with the partial coherent cases (H and V) ...}
+The calculation shown in Figure~\ref{fig:oneTFund} refers for the zero emittance case (complete coherence, or CF=1). An important factor is seen in this Figure: A good focusing, i.e., a very small beam size is only obtained in the limiting cases of open slit and almost-closed slit. This means that for a fully coherent beam, the slit only disturbs the focusing and should be avoided. The diffraction at the slit creates an an spurious divergence that affects the lens power. 
+
+However, the mission of the slit is to improve beam coherence (increase coherent fraction). In storage rings like ESRF-1, with CF  $<10^{-3}$, the slit must be almost closed to gain coherence, thus forming a secondary source. For storage rings like EBS, with CF $ > 10{-2}$, like EBS, the selection of the slit gap opening is crucial: the slit must be closed up to obtain the desired CF, but not more, otherwise will destroy focusing \todo{illustrate it using calculations: compare the coherent case with the partial coherent cases (H and V) ...}. 
+
+ When the EBS emittance values are considered, a coherent mode decomposition of the undulator source is required to include the partial coherent effects. This is done for the horizontal and vertical directions, resulting a CF (at 7 keV) of 0.13 and 0.58, respectively. These values are much higher than for the old ESRF-1 source, but still low for approximating the beam by a coherent source. Therefore, we propagated a number of modes large enough to contain more than 99\% of the source intensity (36 modes in H and 8 in V). The illumination at the entrance slit plane is \SI{610}{\micro\meter} in H times \SI{566}{\micro\meter} in V. The slit aperture is used to tune the coherence of the beam: closing the slit reduces the CF. In the limit (zero aperture) the beam after the slit is fully coherent (CF=1), but obviously with zero intensity. The choice of the right slit aperture comes from a compromise between coherence and flux. The Figure~\ref{fig:oneTFund} shows the CF after of the H and V 1D beams after the slit for different slit apertures. 
 
 
-\todo{Calculations with HYBRID: It works!}
+
+In this section, we have used the 1D approximation, but for the rest there is no approximation: we used the Undulator source, performed Coherent mode decomposition, used an aperture with a rectangular function, and used a Be lens with the real parabolic profile. We could relax some of these factors, for example using Gaussian sources (and GSM decomposition), slits with absorption by Gaussians, and ideal lenses. In Appendix XX we have studied the effect of these approximations. We also show that ray-tracing results using the hybrid method \cite{hybrid} acceptable results. 
 
 
 \begin{figure}
@@ -297,7 +302,8 @@ The calculation shown in Figure~\ref{fig:sizes} refers for the zero emittance ca
     \includegraphics[width=0.95\textwidth]{figures/cf_vs_aperture.eps}
 
     \caption{
-    Coherent fraction in the horizontal and vertical directions as a function of the slit aperture $a$. Top axis shows the $n$ factor as in Fig.~\ref{fig:oneTFund} ($n=565/a$).
+    Coherent fraction in the horizontal and vertical directions for different photon energies as a function of the slit aperture $a$.
+    % Top axis shows the $n$ factor as in Fig.~\ref{fig:oneTFund} ($n=565/a$).
     }
     \label{fig:cf_vs_aperture}
 \end{figure}
@@ -590,7 +596,7 @@ ii) For low coherence the GSM may work, in particular when using the aperture $\
     \includegraphics[width=0.95\textwidth]{figures/oneTFund_200um.eps}
     % \includegraphics[width=0.95\textwidth]{figures/oneTFund_100um.png}
 
-    \caption{Evolution of the size of a coherent undulator beam cropped by a slit and focused by a lens of different radii valyes $R$: a) \SI{400}{\micro\meter} and b) \SI{200}{\micro\meter}.
+    \caption{Evolution of the size of a coherent undulator beam cropped by a slit and focused by a lens of different radii values $R$: a) \SI{400}{\micro\meter} and b) \SI{200}{\micro\meter}.
     
     }
     \label{fig:oneTFundAppendixR}
