@@ -103,67 +103,54 @@ Abstract goes here.
 
 \section{Introduction}
 
-\todo{too much lens oriented.. turn it to partial coherence...}
 
-After the first experimental demonstration of the feasibility of using lenses to focus synchrotron X-ray beams \cite{Snigirev1996}, an exceptional development has been produced in the field. It concerns the material used (typically Be, Al, and C$^*$), the surface shaping methods (punched lenses \cite{XX}, lithographic techniques \cite{XX}), reducing of the surface errors (shape, waviness and roughness), and different techniques for piling lenses. Single lenses with a shape designed to minimize (e.g., parabolic \cite{XX}) or completely reduce optical aberrations (ellipses \cite{XX}, cartesian ovals \cite{XX}) can be used for micro- and nano-focusing \cite{XX} applications. A Compound Refractive Lense (CRL) is a pile of single lenses allowing shorting the focal length. There are typically used to focus or collimate the beam, but they can also perform as monochromators in combination with an slit that select a photon energy bandwidth exploiting the energy-dispersion (chromatic aberration) of the light refraction. A transfocator is a pile of CRLs with possibility of switching on and off the individual CRLs, thus providing an almost continuous variation of the focal distance. 
+Recent fourth-generation storage-ring-based X-ray synchrotron sources deliver photon beams with high brilliance and coherence. The transversal coherence of these beams is highly improved, in particular in the horizontal direction, with respect to previous 3rd generation sources. This has a benefitial impact for many applications requiring coherent beams, such as X-ray photon correlation spectroscopy, coherent diffraction imaging, propagation-based phase-contrast imaging, and ptychography. On the other side, to preserve the wavefront quality with coherent beams it is required better quality materials and optical surfaces in the active beamline components (mirrors, gratings, crystals, lenses). Moreover, the interaction of the coherent beam with the optical elements produce diffraction that may affect the focusing power and resolving power of these elements. For example, consider an ideally focusing system of focal length $F$ made by a mirror or lens that focuses the source into an image plane. The position of the focus with respect to the focusing element $q$ can be estimated by the lens equation $F^{-1}=p^{-1}+q^{-1}$, with $p$ the source-element distance. When the beam numerical aperture (NA) is reduced (for example by the finite dimension of the lens or mirror) the position and also the dimensions of the focal point changes due to diffraction. In the case of a lens of finite aperture illuminated by a Gaussian \inred{coherent?} beam, it has been shown \cite{Tanaka:85} that the focal position ``moves" towards the lens position when NA reduces. This shifting of the focal position is also relevant for synchrotron beamlines, as demonstrated by \cite{westfahl}. These authors noticed a shift of the horizontal focal position upstream from the position given by geometrical optics (see Fig. 7 in \cite{westfahl}) when the horizontal acceptance is reduced by a slit. Numeric results from wavefront propagation using SRW \cite{SRW} including partial coherence and analytical results using the Gaussian Shell-model for a fully coherent beam give similar results in this case.
 
-A lens system for X-ray beamline applications is usually described by parameters related to the lens focal $F$ (typically the curvature $R$ and refraction index $n=1-\delta+i\beta$) which can be approximated by the equation
-\begin{equation}
-    \label{eq:F}
-    F=\frac{R}{2 N \delta},
-\end{equation}
-and the lens absorption, which depends on $\beta$ and is used to define a variety of parameters such as the effective aperture \cite{XX}, and gain \cite{XX}. For multiple lenses (CRLs or transfocators), the global focal distance is $F^{-1}=F_1^{-1}+F_2^{-1}+...$. 
+The diffraction effect at the slits and finite acceptance of the elements not only shifts the focal point, but also changes the focal dimensions, as we will see later. This fact is critical when designing beamlines with several coupled focusing elements. We study this phenomenon applied to the project for the new ID18 beamline at the upgraded EBS-ESRF storage ring. This beamline will produce highly coherent beams with a variable cross section at the sample position. Two refractive systems (transfocators) are paired to allow varying the focal size, whereas a slit placed upstream from the transfocators is used to control the coherent fraction. The optical matching of the transfocators is studied in detail, and is strongly correlated with the slit aperture (or coherent fraction). The study is performed with a newly developed algorithm for coherent mode decomposition of the undulator beams. The method proposed is very fast allowing parametric simulations in a laptop.
 
-For synchrotron beamlines, we are interested in the position of the focal spot and the ``size" of the focal spot. If the source is placed at a distance $p$ from the lens, applying geometrical optics, the beam refracted by the lens has its waist at a distance $q$ given by the lens equation
-\begin{equation}
-    \label{eq:lens}
-    \frac{1}{f} = \frac{1}{p} + \frac{1}{q},
-\end{equation}
-therefore $q=F p / (p-f)$. The system has a magnification $M=q/p$, so for a source of size $s$ the image at the waist has a lateral dimension of $Ms$. 
-
-This last result, which is well known by beamline designers, operators and users, is valid using incoherent beams, or coherent beams with large numerical aperture (NA). In the case of coherent beams with reduced numerical apertures, it has been shown that the focal position ``moves" towards the lens position when NA reduces (see e.g., \cite{Tanaka:85}, and references therein). As far as the author's knowledge, this effect has never been studied in the context of X-ray beams. 
-
-In this paper we study the focal parameters (position, size, intensity) given by a partial coherent beam, where the NA and coherence fraction are controlled by an aperture. We analyze the focal position originated by a compound system of two lenses, CRLs or transfocators. For this analysis, we have developed an innovative algorithm for fully describing partial coherence from undulator beams using coherent mode decomposition. This method is based on the separated analysis of the horizontal and vertical directions (1D model). The results are compared with fully 2D methods (SHADOW hybrid \cite{XX}, SRW \cite{XX}, COMSYL \cite{XX}). We apply the results to the study of a two transfocator system that is being designed for the new ID18 beamline at the upgraded EBS-ESRF \cite{XX}.  
-Pairing two transfocators permits to create a focal spot with size that can adapt to the sample dimensions. The transfocators are design to focus the beam to a spot of variable size in a given interval for a large photon energy range. 
+% In this paper we study the focal parameters (position, size, intensity) given by a partial coherent beam, where the NA and coherence fraction are controlled by an aperture. We analyze the focal position originated by a compound system of two lenses, CRLs or transfocators.
 
 
-\section{A model for simulating an undulator beamline with transfocators}
+% Pairing two transfocators permits to create a focal spot with size that can adapt to the sample dimensions. The transfocators are design to focus the beam to a spot of variable size in a given interval for a large photon energy range. 
 
-For the calculations presented in this paper we have developed a new tool for dealing with partially coherence beams produced by undulators in low-emittance storage rings. For that, we developed a 1D model0 of the coherent mode decomposition previously developed in 2D \cite{XX}. The motivation for developing these new tools is to perform quick calculations (e.g., being able to perform parametric calculations in a laptop) with high accuracy in the simulation of the source and beam propagation. We believe that the separation of the real 2D wavefront in two separated 1D wavefronts is well justified for most synchrotron beamlines, where the cross-talk between these two directions is small. This is justified by comparing results with more CPU demanding 1D simulations. The tools developed here are included in the OASYS toolbox \cite{XX}, available in the WOFRY add-on \cite{XX}. These tools are completely scriptable so they can be used from the OASYS interface, which also creates scripts that can be a posteriori modified for batch runs. 
- 
+% For this analysis, we have developed an innovative algorithm for fully describing partial coherence from undulator beams using coherent mode decomposition.
 
-\subsection{Wavefront creation and propagation}
+% This method is based on the separated analysis of the horizontal and vertical directions (1D model). The results are compared with fully 2D methods (SHADOW hybrid \cite{XX}, SRW \cite{XX}, COMSYL \cite{XX}). We apply the results to the study of a two transfocator system that is being designed for the new ID18 beamline at the upgraded EBS-ESRF \cite{XX}.  
 
-In the limiting case of zero emittance (i.e., ``single-electron" or filament beam), the undulator emission is fully coherent and the wavefront can be calculated using the classical electrodynamics \cite{XX}. These equations are implemented in the pySRU python library \cite{XX} that is used to calculate the undulator emission at a given distance from the source. 
+This is obtained by studying separately the horizontal and vertical planes, therefore implementing a 1D model. The results of this model are verified against 2D models using Monte-Carlo multielectron propagation with SRW and also 2D coherent mode decomposition with COMSYL. It is also shown that ray-tracing simulations using the ``hybrid"" method \cite{hybrid} give correct results for these systems. 
 
-The wavefront evolves when transported in free space from two different positions along the optical axis. We used integral propagators to calculate the wavefront in a given point using the wavefront in another position. In wofry we implemented two propagators, obne based on the direct implementation of the  Rayleigh-Sommerfeld integral, and a second one, the zoom propagator, is a Fresnel propagator using FFT. Both propagators are described in \cite{XX}.
+The paper is organized as follows. Section 2 summarizes the methodology used for 1D coherent mode decomposition of undulator beams. Section 3 analyzes the focusing of partially coherent beams with a single refractive system (lens). Section 4 discusses the pairing of two refractive systems. Section 5 shows simulations for the full beamline and compares different methodologies for a selected case. A general discussion is in section 6 and concluding remarks in section 7. 
 
 
-\subsection{Wavefront modification by apertures and lenses}
+% \todo{too much lens oriented.. turn it to partial coherence...}
 
-A generic aperture is a mask that transmits a part of the wavefront in a range $[x_{min},x_{max}]$ and absorbs the rest. It can be
-\begin{equation}
-R(x;\omega) =
-\left\{
-\begin{matrix}
-A,  & \mbox{~~if~~} x_{min} \le x \le x_{max}
-\\ 
-1 - A, & \mbox{~~elsewhere}
-\end{matrix}
-\right.
-\end{equation}
-When the element is a slit, then $A=1$. If it is a beamstop, then $A=0$. If we deal with an optical element of finite length $L$ placed at a grazing incidence angle $\theta$, it acts as a slit of aperture equal the projection of the length on the $x$ axis: $A=1$, $x_{min}=-(L/2) \sin \theta$ and $x_{max}=(L/2) \sin \theta$. 
+% After the first experimental demonstration of the feasibility of using lenses to focus synchrotron X-ray beams \cite{Snigirev1996}, an exceptional development has been produced in the field. It concerns the material used (typically Be, Al, and C$^*$), the surface shaping methods (punched lenses \cite{XX}, lithographic techniques \cite{XX}), reducing of the surface errors (shape, waviness and roughness), and different techniques for piling lenses. Single lenses with a shape designed to minimize (e.g., parabolic \cite{XX}) or completely reduce optical aberrations (ellipses \cite{XX}, cartesian ovals \cite{XX}) can be used for micro- and nano-focusing \cite{XX} applications. A Compound Refractive Lense (CRL) is a pile of single lenses allowing shorting the focal length. There are typically used to focus or collimate the beam, but they can also perform as monochromators in combination with an slit that select a photon energy bandwidth exploiting the energy-dispersion (chromatic aberration) of the light refraction. A transfocator is a pile of CRLs with possibility of switching on and off the individual CRLs, thus providing an almost continuous variation of the focal distance. 
 
-We can define an ideal lens as a focusing device that converts a plane wave into a spherical wave collapsing to the focus at a distance $f$ from the ideal lens position. Therefore
-\begin{equation}
-    R(x;\omega) = e^{-i k~x^2/(2 f)}
-\end{equation}
+% A lens system for X-ray beamline applications is usually described by parameters related to the lens focal $F$ (typically the curvature $R$ and refraction index $n=1-\delta+i\beta$) which can be approximated by the equation
+% \begin{equation}
+%     \label{eq:F}
+%     F=\frac{R}{2 N \delta},
+% \end{equation}
+% and the lens absorption, which depends on $\beta$ and is used to define a variety of parameters such as the effective aperture \cite{XX}, and gain \cite{XX}. For multiple lenses (CRLs or transfocators), the global focal distance is $F^{-1}=F_1^{-1}+F_2^{-1}+...$. 
 
-\subsubsection{Wavefront modification by a CRLs and transfocators}
+% For synchrotron beamlines, we are interested in the position of the focal spot and the ``size" of the focal spot. If the source is placed at a distance $p$ from the lens, applying geometrical optics, the beam refracted by the lens has its waist at a distance $q$ given by the lens equation
+% \begin{equation}
+%     \label{eq:lens}
+%     \frac{1}{f} = \frac{1}{p} + \frac{1}{q},
+% \end{equation}
+% therefore $q=F p / (p-f)$. The system has a magnification $M=q/p$, so for a source of size $s$ the image at the waist has a lateral dimension of $Ms$. 
 
-\subsubsection{Wavefront modification by a refractive corrector}
+% This last result, which is well known by beamline designers, operators and users, is valid using incoherent beams, or coherent beams with large numerical aperture (NA). In the case of coherent beams with reduced numerical apertures, 
 
-...They can also be used to obtain the best surface to focus in a given point. Therefore it is a way to calculate the optimum lens needed.  
+
+
+\section{1D coherent mode decomposition model of an undulator source and propagation along a beamline with transfocators}
+
+For the calculations presented in this paper we have developed a new tool for dealing with partially coherence beams produced by undulators in low-emittance storage rings. For that, we developed a 1D model of the coherent mode decomposition previously developed in 2D \cite{XX}. The motivation for developing these new tools is to perform quick calculations (e.g., being able to perform parametric calculations in a laptop) with high accuracy in the simulation of the source and beam propagation. We believe that the separation of the real 2D wavefront in two separated 1D wavefronts is well justified for most synchrotron beamlines, where the cross-talk between these two directions is small. 
+% This is justified by comparing results with more CPU demanding 1D simulations. 
+The tools developed here are included in the OASYS toolbox \cite{XX}, available in the WOFRY add-on \cite{XX}. These tools are completely scriptable so they can be used from the OASYS interface, which also creates scripts that can be a posteriori modified for batch runs. 
+
+
 
 \subsection{Partial coherence modeling the undulator beam using coherent mode decomposition}
 
@@ -198,12 +185,12 @@ The modulus of the complex degree of coherence is one for a completely coherent 
 An important result in partial coherence optics permits to describe the radiation as an infinite sum of independent coherent modes (in the sense of orthonormality) :
 
 \begin{equation}
-W(x_1,x_2;\omega) = \sum_{n=0}^{\infty} \lambda_n(\omega) \Phi^*(x_1;\omega) \Phi(x_2;\omega) 
+W(x_1,x_2;\omega) = \sum_{n=0}^{\infty} \lambda_n(\omega) \Phi_n^*(x_1;\omega) \Phi_n(x_2;\omega) 
 \label{eq:CMD}
 \end{equation}
-where $\lambda_n$ (eigenvalues) are the intensity weights and the $\Phi$ are the coherent modes (eigenfunctions). 
+where $\lambda_n$ (eigenvalues) are the intensity weights and the $\Phi_n$ are the coherent modes (eigenfunctions). 
 Some important characteristics of this coherent mode decomposition are: i) the modes are orthonormal (in the integral sense), ii) the modes maximize the spectral density, the first mode is more intense than the second, and so on, meaning that the truncated expansion is optimal, and iii) there is complete coherence if and only if there is only a single mode. If one can truncate the infinite series to a limited number of modes $N$ which contain a good percentage of the spectral density, the numerical storage of the $N$ modes that depend on two spatial variables is usually more economic than the storage of the cross spectral density $W$ that depends on four variables. 
-The eigenvalues $\lambda_n$ are a measure of the intensity. One can define the occupation $\eta$ of the i-th mode as the normalized intensity: 
+The eigenvalues $\lambda_n$ are a measure of the intensity. Indeed, one can define the occupation $\eta$ of the i-th mode as the ratio of its intensity to the total intensity: 
 
 \begin{equation}
 \eta_i(\omega) = \frac{\lambda_i(\omega)}{\sum_{n=0}^{\infty} \lambda_n(\omega)}
@@ -212,21 +199,72 @@ The eigenvalues $\lambda_n$ are a measure of the intensity. One can define the o
 From these arguments, it is now natural to rigorously define Coherent Fraction ($CF$) as the occupation of the first coherent mode: $CF=\eta_0$.
 
 The eigenvalues and the coherent modes are the solution of the homogeneous Fredholm integral equation of second kind \cite{XX}.
-This is an eigenvalue problem. The numerical solution is obtained from the diagonalization of the CSD, which is a multivariate tensor when sampled at the point coordinates. This diagonalization problem is solved in 2D (i.e., $W_{2D}$ is a function of 4 variables) using complex numerical algorithms implemented in COMSYL. Fortunately, in 1D, the CSD is a function of two variables, represented in a matrix that can be easily diagonalized using standard tools availables in python-numpy. The numerical calculation of $W(x_1,x_2)$ uses Kim's convolution theorem \cite{XX} as explained in \cite{XX}.
+This is an eigenvalue problem. The numerical solution is obtained from the diagonalization of the CSD, which is a multivariate tensor when sampled at the point coordinates. This diagonalization problem is solved in 2D (i.e., $W_{2D}$ is a function of 4 variables) using complex numerical algorithms implemented in COMSYL. Fortunately, in 1D, the CSD is a function of two variables, represented in a matrix that can be easily diagonalized using standard tools availables in python-numpy. The numerical calculation of $W(x_1,x_2)$ uses Kim's convolution theorem \cite{XX} as explained in \cite{XX}. It includes two ingredients: i) the statistical parameters of the electron beam at the undulator center (sizes and divergences), and ii) the intensity distribution of the undulator emission at the undulator center. The undulator emission is calculated in a plane far enough from the undulator using classical electrodynamics \cite{XX} (as implemented in the pySRU python library \cite{XX}), and then backpropagated (using a Fresnel propagator) to the center of the undulator. 
 
-The interest of the coherent mode decomposition method is twofold: the possibility to propagate a partial coherent beam along the beamline by just propagating a few modes (less modes for a more coherent beam) which behave like coherent wavefronts, and the use of the coherent fraction to parametrize the beam coherence along the beamline.  
+It is important to calculate the real emission of the undulator which is very different than a Gaussian. However, the (inadequate) use of a Gaussian approximation for the undulator radiation is often found in literature \cite{XX}. In this case the Kim convolution predicts a CSD that is identical to the Gaussian Shell-method. Parameters of the undulator approximated by a GSM can be calculating by matching the coherent as explained in Appendix A. 
 
-\todo{How to approximate an undulator beam with GSM  Appendix A}
+The interest of the coherent mode decomposition method is twofold: the possibility to propagate a partial coherent beam along the beamline by just propagating a few modes (less modes for a more coherent beam) which behave like coherent wavefronts, and the use of the coherent fraction (a scalar parameter) as a measure of how coherent is the beam at any position of the beamline.
+
+\subsection{Wavefront propagation}
+
+% In the limiting case of zero emittance (i.e., ``single-electron" or filament beam), the undulator emission is fully coherent and the wavefront can be calculated using the classical electrodynamics \cite{XX}. These equations are implemented in the pySRU python library \cite{XX} that is used to calculate the undulator emission at a given distance from the source. 
+
+The wavefront evolves when transported in free space from two different positions along the optical axis. We used integral propagators to calculate the wavefront in a given point using the wavefront in another position. In wofry we implemented two propagators, one based on the direct implementation of the  Rayleigh-Sommerfeld integral, and a second one, the zoom propagator, is a Fresnel propagator using FFT. Both propagators are described in \cite{XX}.
 
 
-\subsection{Other 2D methods}
-\begin{itemize}
-    \item {SHADOW-HYBRID}
-    \item SRW Multielectron
-    \item COMSYL
-\end{itemize}
+\subsection{Wavefront modification by apertures}
 
-In addition, we also compared the results with a Gaussian Shell-model in 1D, which is the most simplistic approximation among all partial coherent methods used in this work. 
+A generic aperture is a mask that transmits a part of the wavefront in a range $[x_{min},x_{max}]$ and absorbs the rest. It can be
+\begin{equation}
+R(x;\omega) =
+\left\{
+\begin{matrix}
+A,  & \mbox{~~if~~} x_{min} \le x \le x_{max}
+\\ 
+1 - A, & \mbox{~~elsewhere}
+\end{matrix}
+\right.
+\end{equation}
+When the element is a slit, then $A=1$. If it is a beamstop, then $A=0$. If we deal with an optical element of finite length $L$ placed at a grazing incidence angle $\theta$, it acts as a slit of aperture equal the projection of the length on the $x$ axis: $A=1$, $x_{min}=-(L/2) \sin \theta$ and $x_{max}=(L/2) \sin \theta$.
+
+An interesting and useful case is the ``Gaussian slit" where $A=\exp(-x^2/(2\sigma_a))$. The aperture acts as a Gaussian appodization window. Although artificial, it is interesting to shape the beam with a Gaussian profile, which remains a Gaussian after propagation. Therefore, a Gaussian slit does not produce diffraction fringes. Several recipes are proposed to relate $\sigma_a$ with the slit aperture $\Delta=x_{max}-x_{min}$. We found convenient to define $\sigma_a=\Delta/2.355$.
+
+\subsection{Wavefront modification by refractive systems}
+
+\subsubsection{Ideal lens}
+We can define an ideal lens as a focusing device that converts a plane wave into a spherical wave collapsing to the focus at a distance $f$ from the ideal lens position. Therefore
+\begin{equation}
+    R(x;\omega) = e^{-i k~x^2/(2 f)}.
+\end{equation}
+
+An ideal coupling of $N$ ideal lenses will present a focal length $f=(f_1^{-1}+f_2^{-1}+...+f_N^{-1})^{-1}$. 
+
+\subsubsection{Thin object} A refractor made by a material with refraction index $n=1-\delta+i\beta$ ($n$ depends the photon wavelength $\lambda$) and thickness profile $z(x)$ adds a phase to the wavefront $-\lambda \delta z(x)$ and reduce its amplitude by $\exp(-\mu z(x)/2)$, where $\mu=(4 \pi/\lambda) \delta$ is the (intensity) attenuation coefficient. These expressions can be applied to any transmission object of profile $x(z)$ assuming valid the thin object approximation. 
+
+
+\subsubsection{Real lens} The changes induced by a real lens in the wavefront can be calculated using the thin object approximation discussed below, using the lens profile. Usually, a single lens has a parabolic profile $z=x^2/(4R)$ with $R$ the radius the apex. A lens has two parabolic profiles (front and back) separated by a lens thickness $d$ and a flat profile outside the lens aperture $L$, therefore:
+\begin{align}
+    z(x) &= \frac{1}{2R} z^2 + d; & x < L/2\\ \nonumber
+    z(x) &= \frac{1}{2R} (L/2)^2 + d; & x \ge L/2.
+\end{align}
+
+\subsubsection{CRLs and transfocators}
+A Compound Refractive Lens is a pile of $N$ identical lenses. If we consider negligible the beam propagation in the inter-lens space, the effect of the $N$ lenses is identical of a single lens with profile $x_N(z)=N z(x)$. If one is interested in assessing the effect of the inter-lens space (e.g. for studying the adiabatic focusing)  the CRL must be calculates as $N$ independent lenses, applying the free-space propagator in between two consecutive lenses. For transfocators (a transfocator is a pile of CRLs) the same concepts apply: it is possible to compute the accumulated lens profile and use it as a single lens, or calculate lens by lens (or CRL by CRL) if the effect of inter-lens or inter-CRL spaces are to be taken into account.
+
+\subsubsection{Lens errors}
+The profile of a real lens $z(X)$ can be decomposed in the ideal parabolic profile (best fitted parabola) $z_P(X)$ plus a residual profile (errors) $z_{error}(X)$. One can then apply the thin object approximation with this profile. 
+
+\subsubsection{Refractive corrector}
+One can imagine a refractive object to focus an arbitrary incoming wavefront to a given point placed at a distance $D$. In other words, this object would transform the incoming wavefront into a spherical (circular in 1D) wavefront collapsing to the focus. The profile of such refractive ``corrector"  can be calculated using the phase difference $\Delta\phi(x)=\phi_S(x)-\phi(x)$ ($\phi_S=k x^2 / (2 D)$ is the phase of the circular wave collapsing at $D$, and $phi$ is the phase of the incoming wavefront), and then the corrective profile is $z(x)=-\Delta\phi/(k \delta)$.
+
+% \subsection{Other 2D methods}
+% \begin{itemize}
+%     \item {SHADOW-HYBRID}
+%     \item SRW Multielectron
+%     \item COMSYL
+% \end{itemize}
+
+% In addition, we also compared the results with a Gaussian Shell-model in 1D, which is the most simplistic approximation among all partial coherent methods used in this work. 
 
 \section{Effect of NA in focal position for a focused coherent beam}
 
