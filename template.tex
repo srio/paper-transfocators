@@ -694,26 +694,36 @@ We can conclude that the hybrid ray tracing is a valid method to obtain good val
 \section{Discussion}
 \label{sec:discussion}
 
-\subsection{complexity of setting and f1 f2 trajectories}
+
+\subsection{f1 f2 trajectories and focal sizes} 
+
+From the results shown in the last section, it is clear that the focusing of the partial coherence x-ray beams produced by low emittance storage rings, is a complex phenomenon as the effects of diffraction induced by coherence modify the propagation of the beam. The concepts of geometrical optics often used to calculate the focal position (lens equation) and the focal size (using magnification) fail when the x-ray beam is cropped significantly (NA reduced) (see Figs.~XX, XX) . In older synchrotrons, these analytical results from geometrical optics work better because the beam is mostly incoherent in the horizontal, therefore a pinhole source is then created usually after imaging the source into a secondary source at the pinhole position. The systems studied here will image directly the source into the focal plane, using two focusing elements (paired transfocators) and this is an innovative concept permitted only in new storage rings. However, at the ID18 beamline at the EBS-ESRF source, and at the energy discussed of 7 keV, the horizontal coherent fraction is still much lower than the vertical one (Fig. XX). This imply the necessity of cropping more the beam in horizontal than in vertical to get the same CF, therefore its smaller reduction of NA induces more distortions in the beam. In the vertical direction, the beam must be cropped as well, and the beam distortion is smaller than in horizontal. However, the apertures needed to obtain typical values of CF suitable for experiments (50-95 \%) do strongly affect the evolution of the beam, but still they are large enough to justify to consider a secondary source at the slit. 
+This is evident in Fig. 3: in vertical most of the typical apertures (up to XX um) still makes the system to image the source at the ID center to the focal plane, whereas in horizontal, the cropping needed to get $CF_h=$ 90\% already makes the effect of "shifting" the source from its real position (ID center) to the slit position. Although this shift of the focal position has been predicted and calculated before (see \cite{tanaka} for Gaussian beams, or \cite{whej} for synchrotron beams) our calculations in Fig. 3 reveal two important facts: i) the shift exists but it is directed upstream to the position defined by the geometrical optics for the slit image (and not downstream to the lens position, as found for the systems analyzed in the references mentioned), and ii) the focal size is highly degraded (its size increases) when the beam focus is found in between the two positions defined by the geometrical optics.  
 
 
-\begin{itemize}
-    \item Looking at Fig.~\ref{fig:f1f2map}a we observe an asymptotic approach (for $f1<$~\SI{25}{\meter} or $f1>$~\SI{70}{\meter}) of the numerical results to geometrical optics results, mostly with source at the ID, but sometimes (with closed slit) to the case of the source at the slit position. However, this case is obtained in H with a reasonable aperture $a=$~\SI{40.4}{\micro\meter}, a value of interest in real cases (to get $CF_h=$90\%) but with a less interesting aperture in V $a=$~\SI{25}{\micro\meter}, because high coherence can be obtained with more opened slits without compromising transmission. 
-    \item When looking at the obtained sizes in Fig.~\ref{fig:focalSizes} the results of the geometrical optics cannot be used to guess the spot sizes. In H, only around $f_1\approx$~\SI{30}{\meter} geometrical optics give good results. In V, at  $f_1 <$~\SI{30}{\meter} the geometrical optics prediction can be reliable. 
-    \item The trajectory maps and size graphs are complex. First beamline that gets high coherence by direct imaging the source in H at 4th generation storage ring sources. 
-    \item \todo{because of the system complexity it would be good to have an experimental method to guarantee that the focus sit on the image plane (so we are not out of focus)}
-\end{itemize}
+Pairing two transfocators consists in matching their focal distances to guarantee the focus at the desired focal plane (the sample position). By matching the lens equations of the two lenses, it is possible the analytical expression in Eq.~XX permits to calculate f2 as a function of f1. This can be done for the two cases: with the source at the ID center (limit of high NA, no cropping) of with the source at the slit (pinhole limit when NA$\arrow$0). The analytical equations diverge at the point where lens 1 focuses onto f2.
+\inblue{Looking at Fig.~\ref{fig:f1f2map}a we observe an asymptotic approach (for $f1<$~\SI{25}{\meter} or $f1>$~\SI{70}{\meter}) of the numerical results to geometrical optics results, mostly with source at the ID, but sometimes (with closed slit) to the case of the source at the slit position. However, this case is obtained in H with a reasonable aperture $a=$~\SI{40.4}{\micro\meter}, a value of interest in real cases (to get $CF_h=$90\%) but with a less interesting aperture in V $a=$~\SI{25}{\micro\meter}, because high coherence can be obtained with more opened slits without compromising transmission. }
+Our numerical simulation of the (f1,f2) trajectory maps present two characteristics: i) they asymptotically match the analytical positions for sufficiently high of small $f_1$, either the position obtained when the source is at ID (high NA ) or when the source is at the slit (low NA), and ii) the analytical singularities found in $f_2$ when lens 1 focuses on lens 2 is smoothed and the transition from one branch to another becomes soft. It is softer for smaller NAs in the horizontal (Fig. 4a) but not relevant in the vertical (Fig. 4b). The inflexion point shifts from the position "ID center" to the "slit center" when NA reduces. But, as discussed in the last paragraph, this shifting is evident in the horizontal for the usual slit openings, but is not yet relevant in vertical for common apertures. 
+
+When looking at the obtained sizes in Fig.~\ref{fig:focalSizes} the results of the geometrical optics cannot be used to guess the spot sizes. In H, only around $f_1\approx$~\SI{30}{\meter} geometrical optics give good results. In V, at  $f_1 <$~\SI{30}{\meter} the geometrical optics prediction can be reliable. 
+ 
+
+% The trajectory maps and size graphs are complex. First beamline that gets high coherence by direct imaging the source in H at 4th generation storage ring sources. 
+
 
 
     
-\subsection{methods}
+\subsection{Methods of caculation}
 
-\begin{itemize}
-    \item wave optics simulations using the three methods (Wofry1D, COMSYL and SRW) give the same results within a \todo{10\%??} discrepancies. This is a validation than the newly proposed method Wofry1D produces reliable results in a much shorter calculation time \todo{table/discussion on CPU usage?}. Note that these numerical values depend not only on the method used, but on the particular specific parameters in each method (number of pixels for sampling, zoom factor in propagation, etc.). However, the agreement is very good in terms not only of numerical values but also in the shape of intensity distributions (compare Figs. XX).
-    \item \todo{discuss hybrid results: it would be reasonable to get good numerical values for cases 1 and 2 (high coherence) but not so good in the case of moderate coherence}
-    \item run times comparison
+The results presented here in Fig. 5 contains hundreds \todo{how many} of individual simulations. Each point or simulation implements a full partial coherence simulation involving the transport of many modes. This has only be possible with the development of a new fast 1D CMD method that has been outlined in section XX. Section XX makes a careful analysis of several points in Fig. XX and XX, and also validates the accuracy of the Wofry 1D method by comparing the results with full 2D CMD and SRW-ME. 
+The wave optics simulations using the three methods (Wofry1D, COMSYL and SRW) give the same results within a \todo{10\%??} discrepancies. This is a validation than the newly proposed method Wofry1D produces reliable results in a much shorter calculation time \todo{table/discussion on CPU usage?}. Note that these numerical values depend not only on the method used, but also on the particular specific parameters in each method (number of pixels for sampling, zoom factor in propagation, etc.). However, the agreement is very good in terms not only of numerical values but also in the shape of intensity distributions (compare Figs. XX).
+ 
+\inred{In our search of fast and accurate methods of calculation, based on out scheme of making hierarchical simulations \cite{hierarchical} we have applied the hybrid. We see that the results are acceptable in terms of calculated beam sizes, ... }
+
+\todo{run times comparison. Table?}
+
     % \item \todo{Discuss GSM in two cases: i) GSM source and full beamline, and ii) GSM source and Gaussian slit}
-\end{itemize}
+
 
 \subsection{Further simulations}
 
@@ -749,6 +759,7 @@ case  & Wofry1D & COMSYL  & SRW& Hybrid \\
 \subsection{Tips to experimentalists}
 
 \begin{itemize}
+    \item \todo{because of the system complexity it would be good to have an experimental method to guarantee that the focus sit on the image plane (so we are not out of focus)}
     \item Useful plots: CF vs slit size, trajectories, size. Simulated ones, create similar look-up tables. Digital twin. 
     \item To get similar size, prefer a large $f_1$ to avoid too large illumination in lens2.
     \item Lens granularity
@@ -763,7 +774,7 @@ We have studied in detail the focusing of a partial coherent beam (as produced b
 
 We calculated numerically the map or trajectory of focal distances $(f_1,f_2)$ needed to maintain the focus at the image plane. The beam size values obtained for different cases are very different of the ones predicted by the geometrical optics.  
 
-Numerical calculations for this work have been done using a newly developed method of coherent mode decomposition in 1D. This method is very fast, and many simulations can be sun in a laptop, therefore it is idoneous for parametric calculations as presented here. This method is available in the Wofry add-on of the OASYS\cite{codeOASYS} suite. Four cases are also calculated and compared among them using the other methods available in OASYS, like the full 2D coherent mode decomposition using COMSYL \cite{codeCOMSYL}, the OASYS interface for the SRW \cite{codeSRW} code, and ray tracing with SHADOW\cite{codeSHADOW} using the hybrid method proposed by \cite{codeHYBRID}. OASYS workspaces for the simulations performed in this paper are available at {\tt https://github.com/oasys-esrf-kit/...} 
+Numerical calculations for this work have been done using a newly developed method of coherent mode decomposition in 1D. This method is very fast, and many simulations can be run in a laptop, therefore it is idoneous for parametric calculations as presented here. This method is available in the Wofry add-on of the OASYS\cite{codeOASYS} suite. Four cases are also calculated and compared among them using the other methods available in OASYS, like the full 2D coherent mode decomposition using COMSYL \cite{codeCOMSYL}, the OASYS interface for the SRW \cite{codeSRW} code, and ray tracing with SHADOW\cite{codeSHADOW} using the hybrid method proposed by \cite{codeHYBRID}. OASYS workspaces for the simulations performed in this paper are available at {\tt https://github.com/oasys-esrf-kit/...} 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
