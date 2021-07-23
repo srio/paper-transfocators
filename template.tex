@@ -12,12 +12,13 @@
 \usepackage{color}
 \usepackage{amsmath,amssymb}
 \usepackage{mathtools}
-
+\usepackage[normalem]{ulem}
 
 \newcommand{\todo}[1]{{\color{red}[TODO: "#1'']}}
 \newcommand{\inblue}[1]{{\color{blue}#1}}
 \newcommand{\inred}[1]{{\color{red}#1}}
 \newcommand{\ingreen}[1]{{\color{green}#1}}
+\newcommand{\soutred}[1]{{\color{red}\sout{#1}}}
 
 
      %-------------------------------------------------------------------------
@@ -104,7 +105,7 @@ Abstract goes here.
 \section{Introduction}
 
 
-Recent fourth-generation storage-ring-based X-ray synchrotron sources deliver photon beams with high brilliance and coherence. The transversal coherence of these beams is highly improved, in particular in the horizontal direction, with respect to previous 3rd generation sources. This has a beneficial impact for many applications requiring coherent beams, such as X-ray photon correlation spectroscopy, coherent diffraction imaging, propagation-based phase-contrast imaging, and ptychography. On the other side, to preserve the wavefront quality with coherent beams it is required better quality materials and optical surfaces in the active beamline components (mirrors, gratings, crystals, lenses). Moreover, the interaction of the coherent beam with the optical elements produce diffraction that may affect the focusing power and resolving power of these elements. For example, consider an ideally focusing system of focal length $F$ made by a mirror or lens that focuses the source into an image plane. The position of the focus with respect to the focusing element $q$ can be estimated by the lens equation $F^{-1}=p^{-1}+q^{-1}$, with $p$ the source-element distance. When the beam numerical aperture (NA) is reduced (for example by the finite dimension of the lens or mirror) the position and also the dimensions of the focal point changes due to diffraction. In the case of a lens of finite aperture illuminated by a Gaussian \inred{coherent?} beam, it has been shown \cite{Tanaka:85} that the focal position ``moves" towards the lens position when the numerical aperture (NA) reduces. This shifting of the focal position is also relevant for synchrotron beamlines, as demonstrated by \cite{westfahl}. These authors noticed a shift of the horizontal focal position upstream from the position given by geometrical optics (see Fig. 7 in \cite{westfahl}) when the horizontal acceptance is reduced by a slit. Numeric results from wavefront propagation using SRW \cite{SRW} including partial coherence and analytical results using the Gaussian Shell-model for a fully coherent beam give similar results in this case.
+Recent fourth-generation storage-ring-based X-ray synchrotron sources deliver photon beams with high brilliance and coherence. The transversal coherence of these beams is highly improved, in particular in the horizontal direction, with respect to previous 3rd generation sources. This has a beneficial impact for many applications requiring coherent beams, such as X-ray photon correlation spectroscopy, coherent diffraction imaging, propagation-based phase-contrast imaging, and ptychography. On the other side, to preserve the wavefront quality with coherent beams it is required better quality materials and optical surfaces in the active beamline components (mirrors, gratings, crystals, lenses). Moreover, the interaction of the coherent beam with the optical elements produce diffraction that may affect the focusing power and resolving power of these elements. For example, consider an ideally focusing system of focal length $F$ made by a mirror or lens that focuses the source into an image plane. The position of the focus with respect to the focusing element $q$ can be estimated by the lens equation $F^{-1}=p^{-1}+q^{-1}$, with $p$ the source-element distance. When the beam numerical aperture (NA) is reduced (for example by the finite dimension of the lens or mirror) the position and also the dimensions of the focal point changes due to diffraction. In the case of a lens of finite aperture illuminated by a Gaussian \inred{coherent?} beam, it has been shown \cite{Tanaka:85} that the focal position ``moves" towards the lens position when the numerical aperture (NA) reduces. This shifting of the focal position is also relevant for synchrotron beamlines, as demonstrated by \cite{westfahl}. These authors noticed a shift of the horizontal focal position upstream from the position given by geometrical optics (see Fig. 7 in \cite{westfahl}) when the horizontal acceptance is reduced by a slit. Numeric results from wavefront propagation using SRW \cite{codeSRW} including partial coherence and analytical results using the Gaussian Shell-model for a fully coherent beam give similar results in this case.
 
 The diffraction effect at the slits and finite acceptance of the elements not only shifts the focal point, but also changes the focal dimensions, as we will see later. These facts are critical when designing beamlines with several coupled focusing elements. We study this phenomenon applied to the project for the new ID18 beamline at the upgraded EBS-ESRF storage ring. This beamline will produce highly coherent beams with a variable cross section at the sample position. Two refractive systems (transfocators) are paired to allow a varying focal size, whereas a slit placed upstream from the transfocators is used to control the coherent fraction. The optical matching of the transfocators is studied in detail, and is strongly correlated with the slit aperture (or coherent fraction). The study is performed with a newly developed algorithm for coherent mode decomposition of the undulator beams. The method proposed is very fast allowing parametric simulations in a laptop.
 
@@ -435,7 +436,7 @@ We analyze here how to design an optical system using two transfocators and how 
     \centering
     \begin{tabular}{l|c|c}
          element & position [m] & comment\\
-         ID (undulator) source& 0 & U19 $N_u$=138 $K$=1.185 (7 keV)\\
+         ID (undulator) source& 0 & U18 $N_u$=138 $K$=1.185 (7 keV)\\
          Slit & 36 &
          variable aperture $a_h\times a_v$
          \\
@@ -547,12 +548,12 @@ Figure ~\ref{fig:focalSizes} shows the calculated focal sizes. Analytical values
 
 \section{Simulations of the complete beamline}
 
-In this section we analyse in detail the full beamline using several methodologies. We selected four cases, the first one with the target of a small spot ( around \SI{5}{\micro\meter}) and a large spot (more than \SI{30}{\micro\meter}) for the second case.  The slits are selected to match a $CF_h=CF_v=$90\% for a photon energy of \SI{7}{keV}. The values are selected from results shown in Fig.~\ref{fig:focalSizes} and are shown in Table~\ref{table:2Dusercases}. The cases 3 and 4 follow the same logic but the slits are set to get $CF_h=CF_v=$70\%.   
+In this section we analyse in detail the full beamline using several methodologies. We analyze in detail the intensity distribution at the focal plane for four cases. They have been selected from the results in Fig.~\ref{fig:focalSizes}). The first case is selected to obtain a small spot (about \SI{5}{\micro\meter}) and the second one a large spot (more than \SI{30}{\micro\meter}).  For these cases the slits are selected to match a $CF_h=CF_v=$90\% for a photon energy of \SI{7}{keV}. The values are shown in Table~\ref{table:2Dusercases}. The cases 3 and 4 follow the same logic but the slits are opened to obtain a less coherent beam ($CF_h=CF_v=$70\%). The analysis is made with different methodologies, using different software codes, following an hierarchical approach, as discussed in \cite{hierarchical}, with the idea to evaluate accuracy and computational effort, and select the most advantageous method for the analyzed problem. This multi-method analysis will also validate the new method introduced in this work, the 1D CMD, by comparing its results with other well-known simulation tools. 
 
 \begin{table}[]
     \label{table:2Dusercases}
     \caption{Configurations selected for 2D simulations. Slit aperture $a$ is selected for obtaining $CF_h=CF_v=$90\% in cases 1 and 2, and $CF_h=CF_v=$70\% in cases 3 and 4. Data is obtained from Fig.~\ref{fig:focalSizes}.
-    \todo{case 3v gives too large lens 2 illumination ($>$2mm) REPLACE? - Delete index column}}
+    }
     \centering
     \begin{tabular}{c|c|c|c|c|c|c|c}
          case h/v & $a$ [\SI{}{\micro\meter}] & $f_1$ [m] & $f_2$ [m] & $R_1$ [\SI{}{\micro\meter}]& $R_2$ [\SI{}{\micro\meter}] & size [\SI{}{\micro\meter}]& index\\
@@ -564,7 +565,7 @@ In this section we analyse in detail the full beamline using several methodologi
 2 v &      227.0 & 42.2 &     55.6 &     588.6 &     775.3 &     32.3 &     78 \\
 \hline \hline
 3 h &      85.1 & 46.1 &     31.8 &     641.9 &     443.7 &     35.5 &     86 \\
-3 v &      506.7 & 15.0 &     22.2 &     209.4 &     309.6 &     4.7 &     21 \\
+3 v &      506.7 & 85.2 &     27.8 &     1187.4 &     387.6  &     5.3 &     168 \\
 \hline
 4 h &      85.1 & 25.1 &     20.7 &     349.1 &     288.7 &     24.0 &     42 \\
 4 v &      506.7 & 42.2 &     55.7 &     588.6 &     776.0 &     134.3 &     78 \\
@@ -572,36 +573,65 @@ In this section we analyse in detail the full beamline using several methodologi
     \end{tabular}
 \end{table}
 
+\begin{table}[]
+    \label{table:comparison}
+    \caption{Comparison of sizes (FWHM, in \SI{}{\micro\meter}) calculated with different methods for the cases defined in Table~\ref{table:2Dusercases}.
+    In brackets, the values for the fully coherent beam (single electron with SRW, first coherent mode with COMSYL/WOFRY), and zero emittance with Hybrid).
+    Coherent fraction is square brackets \inblue{[CF]}}
+    \centering
+    \begin{tabular}{p{0.05\textwidth}|c|c|c|c|c|}
+         case h/v &
+         Wofry1D&
+         COMSYL&
+         SRW&
+         Hybrid \\
+         \hline
+1 h  & 8.6,8.5(8.1) \inblue{[94]}  & 10.0 (9.9)  & 8.6 (7.5)   & 17.3 \\
+1 v  & 5.3,4.8(4.8) \inblue{[97]}   & 4.7 (5.1)   & 4.6 (4.6)   & 3.3 \\
+\hline
+2 h  & 42.0,39.9(38.2) \inblue{[94]} & 39.5 (39.5) & 40.0 (36.1)  & 39.9 \\
+2 v  & 32.3,32.4(29.6) \inblue{[90]} & 30.6 (29.3) & 34.4 (29.6)  & 74.0 \\
+\hline
+3 h  & 35.6,37.5(29.0) \inblue{[77]} & 36.6 (28.1) & 40.3 (28.4)  & 43.3 \\
+3 v  & 5.3,6.1 (4.9)  \inblue{[77]} & 6.4 (5.7) & 6.3 (4.6)   & 6.5 \\
+\hline
+4 h  & 24.0,24.6(19.1)\inblue{[77]}  & 26.1 (18.6) & 27.4 (18.0)  & 27.1 \\
+4 v  & 134.4,133.7(110.3)\inblue{[71]}& 111.7 (90.4) & 137.4 (132.0) & 150.2 \\
+    \end{tabular}
+\end{table}
 
 
+\subsection{Model WOFRY 1D}
+We have recalculated with Wofry 1D the cases shown in Table~\ref{table:2Dusercases}. We then combined the 1D horizontal and vertical profiles (using the outer product) to form the 2D intensity profile at the focal plane. Results are shown in Fig.~\ref{fig:2DWofry1D}. Looking at the intensity distributions, it can be observed a variety of features that are due to the diffraction effects. Case 1 shows an horizontal profile mostly triangular with shoulders that evidence small diffraction fringes. The fringes are more resolved in the vertical direction. Case 2 horizontal presents a soft Gaussian-like profile, but in vertical important symmetric shoulders are appreciated. Case 3 shows a smooth Gaussian profile in horizontal \todo{check/mention the wiggles that are probably artifacts} and a small shoulder with fringes in vertical. Case 4 shows a conventional smooth profile in horizontal but an original three-lobe plateau in vertical. This variety of profile distribution demonstrates how relevant the diffraction effects are, which modulate the beam shape in a non-trivial way.  
+
+\subsection{2D Model COMSYL}
+COMSYL performs full CMD of undulator beam \cite{glass2017}. It requires high performance computing (HPC) to solve the Friedholm problem and obtain the full 2D eigenfunctions (coherent modes) and eigenvalues. Once COMSYL calculates the source, OASYS is used to propagate the modes along the beamline. This is done with 2D propagators and optical elements available in Wofry. Results are shown in Fig.~\ref{fig:comsyl}. This figure shows results very similar to Fig.~\ref{fig:2DWofry1D}, which is reasonable because the physical models used for the CMD and propagation are similar. The beam profiles calculated with COMSYL are a bit more noise, as the number of pixels cannot be as high as in Wofry within a reasonable CPU usage. This full calculation with COMSYL helps us to validate the approximation at the basis of the 1D CMD introduced in this work: the 1D CMD gives essentially the same results as the full 2D CMD with COMSYL.   
+
+\subsection{2D Model SRW}
+SRW~\cite{codeSRW} is a well-established code in the synchrotron community for simulating the emission of synchrotron sources and propagating it along a full beamline. It can be used in single-electron (SRW-SE) mode, where the source is the fully coherent undulator radiation in an ideal storage ring with zero emittance. To include finite-emittance, and therefore the production and propagation of partial coherent beams, SRW uses the multi-electron (SRW-ME) algorithm, that propagates many wavefronts each one created by an electron that enters in the ID with different initial conditions (position and direction) that are sampled from the parameters of the electron beam (moments or Twiss parameters) using a Monte Carlo method. This method allows to produce accurate intensity maps (by adding the intensity of individual electrons) and is possible to calculate other parameters of the partially coherent-beam, such as coherence lengths. However, it is not able to calculate the full CSD and CF. The SRW-ME requires the use of HPC. 
+
+We have simulated the cases shown in Table~\ref{table:2Dusercases} using SRW-ME, and results are shown in Fig.~\ref{fig:srw}. We performed a convergence analysis as described in Appendix~\ref{appendix:srw} to determine the minimum number of electrons needed to get accurate results. Interestingly, the SRE-ME simulations for the cases analyzed, that produce a relatively high CF, need only a few thousands electrons, which can be run in less than one hour in a node with 28 CPSs \inred{of XX GB each}.
+
+The agreement between the results of SRW (Fig.~\ref{fig:srw}) with Wofry1D (Fig.~\ref{fig:2DWofry1D}) is striking. All intensity distributions reproduce exactly the same features, and the FWHM values are coincident within \inred{XX \%}. This results validates, once more, the 1D CDM method proposed here whose requirements in computer power are extremely low, and can be run in an averaged laptop.  
+
+\subsection{2D Model hybrid ray-tracing}
+When analysing optical systems dealing with beams with high coherence, thus originating diffraction effects, the use of pure ray tracing methods (based in geometrical optics) are not adequate. Indeed, as mentioned before, conventional ray tracing does not reproduce the effects of focal position shift and focus degradation when the NA is reduced. However, ray tracing-based methods much simple and fast than wave-optics-based methods, and in many occasions they are very useful to evaluate the impact of the beam coherence when studing a synchrotron beamline. For that, a hybrid  \cite{codeHYBRID} algorithm incorporating coherent concepts in the ray tracing code SHADOW \cite{codeSHADOW} has been developed. It has been fully   integrated in the ShadowOUI \cite{codeSHADOWOUI} add-on in OASYS. It has been demonstrated to be an efficient tool to design beamlines also including coherence effects. We have used the Hybrid method to analyse our cased defined in Table~\ref{table:2Dusercases}, and the results are shown in Fig.~\ref{fig:hybrid}.  
 
 
-\subsection{1D model (WOFRY)}
-We have calculated with wofry 1D the cases shown in Table~\ref{table:2Dusercases} and combine the 1D profiles using the outer product to form the 2D intensity profile at the focal plane. Results are shown in Fig.~\ref{fig:2DWofry1D}.
+% In the case of hybrid ray-tracing, results are shown in Table~\ref{table:2Dhybridshadow}. 
+
+\newpage
 
 \begin{figure}\label{fig:2DWofry1D}
     \centering
-
-    
-    \includegraphics[width=0.45\textwidth]{figures/case_1_profiles.eps}
-    \includegraphics[width=0.45\textwidth]{figures/case_1_image.eps}
- 
-    \includegraphics[width=0.45\textwidth]{figures/case_2_profiles.eps}
-    \includegraphics[width=0.45\textwidth]{figures/case_2_image.eps}
-
-    \includegraphics[width=0.45\textwidth]{figures/case_3_profiles.eps}
-    \includegraphics[width=0.45\textwidth]{figures/case_3_image.eps}
-    
-    \includegraphics[width=0.45\textwidth]{figures/case_4_profiles.eps}
-    \includegraphics[width=0.45\textwidth]{figures/case_4_image.eps}
-        
-    \caption{xxx
-    }
-    
+    case 1~~~~~~~~~~~~~~~~~~~~~~~~~~~~~case 2\\
+    \includegraphics[width=0.45\textwidth]{figures/case1_wofry_ws_results.png}
+    \includegraphics[width=0.45\textwidth]{figures/case2_wofry_ws_results.png}\\
+    case 3~~~~~~~~~~~~~~~~~~~~~~~~~~~~~case 4\\
+    \includegraphics[width=0.45\textwidth]{figures/case3_wofry_ws_results.png}
+    \includegraphics[width=0.45\textwidth]{figures/case4_wofry_ws_results.png}
+    \caption{2D plots constructed from the 1D Wofry calculations.}
 \end{figure}
-
-
-\subsection{2D Model COMSYL}
 
 \begin{figure}\label{fig:comsyl}
     \centering
@@ -611,11 +641,8 @@ We have calculated with wofry 1D the cases shown in Table~\ref{table:2Dusercases
     case 3~~~~~~~~~~~~~~~~~~~~~~~~~~~~~case 4\\
     \includegraphics[width=0.45\textwidth]{figures/case3_comsyl.png}
     \includegraphics[width=0.45\textwidth]{figures/case4_comsyl.png}
-    \caption{COMSYL calculations \todo{check case 3 wrong vertical}}
+    \caption{COMSYL calculations}
 \end{figure}
-
-
-\subsection{2D Model SRW}
 
 \begin{figure}\label{fig:srw}
     \centering
@@ -625,58 +652,47 @@ We have calculated with wofry 1D the cases shown in Table~\ref{table:2Dusercases
     case 3~~~~~~~~~~~~~~~~~~~~~~~~~~~~~case 4\\
     \includegraphics[width=0.45\textwidth]{figures/case3_srw.png}
     \includegraphics[width=0.45\textwidth]{figures/case4_srw.png}
-    \caption{xxx SRW simulations (single electron)}
+    \caption{Multi-electron SRW simulations}
 \end{figure}
 
-
-\subsection{2D Model hybrid ray-tracing}
-In the case of hybrid ray-tracing, results are shown in Table~\ref{table:2Dhybridshadow}. 
+\vspace{3cm}
 
 \begin{figure}
+    \label{fig:hybrid}
     \centering
-    % \includegraphics[width=0.95\textwidth]{figures/Figure_magnification_99.png}
-    %\includegraphics[width=0.95\textwidth]{figures/Figure_magnification_123.png}
-    
-    \includegraphics[width=0.95\textwidth]{figures/sizes_h_hybrid.eps}
-    \includegraphics[width=0.95\textwidth]{figures/sizes_v_hybrid.eps}
-        
-    \caption{Focal sizes obtained by hybrid ray tracing method compared with 1D Model (WOFRY). Analytical values are same as Figure \ref{fig:focalSizes}. 
-    % Numerical values \ingreen{green} are obtained for the slit (upstream lens 1) either open or closed to $a$~= \SI{25}{\micro\meter}.
-    }
-    \label{fig:focalSizes_hybrid}
+    case 1~~~~~~~~~~~~~~~~~~~~~~~~~~~~~case 2\\
+    \includegraphics[width=0.45\textwidth]{figures/case1_hybrid.png}
+    \includegraphics[width=0.45\textwidth]{figures/case2_hybrid.png}\\
+    case 3~~~~~~~~~~~~~~~~~~~~~~~~~~~~~case 4\\
+    \includegraphics[width=0.45\textwidth]{figures/case3_hybrid.png}
+    \includegraphics[width=0.45\textwidth]{figures/case4_hybrid.png}
+    \caption{Hybrid ray tracing simulations}
 \end{figure}
 
-
-\begin{table}[]
-    \label{table:comparison}
-    \caption{Comparison of sizes (FWHM, in \SI{}{\micro\meter}) calculated with different methods. fro the different cases defined in Table~\ref{table:2Dusercases}.
-    \todo{SRW calculations are single electron TO UPGRADE...}}
-    \centering
-    \begin{tabular}{p{0.05\textwidth}|c|c|c|c|c|}
-         case h/v &
-         Wofry1D&
-         COMSYL&
-         SRW&
-         Hybrid \\
-         \hline
-1 h  & 8.6   & 10.0  & 7.8   & 17.3 \\
-1 v  & 5.3   & 4.6   & 4.5   & 3.3 \\
-\hline
-2 h  & 42.0  & 39.5  & 37.6  & 39.9 \\
-2 v  & 32.3  & 30.6  & 29.7  & 74.0 \\
-\hline \hline
-3 h  & 35.5  & 38.3          & 27.4  & 43.3 \\
-3 v  & 4.7   & \inred{2482}  & 5.2   & 2.4 \\
-\hline
-4 h  & 24.0  & 25.5  & 17.5  & 27.1 \\
-4 v  & 134.3 & 113.4 & 130.0 & 150.2 \\
+\newpage
 
 
 
-    \end{tabular}
 
 
-\end{table}
+
+% \begin{figure}
+%     \centering
+%     % \includegraphics[width=0.95\textwidth]{figures/Figure_magnification_99.png}
+%     %\includegraphics[width=0.95\textwidth]{figures/Figure_magnification_123.png}
+    
+%     \includegraphics[width=0.95\textwidth]{figures/sizes_h_hybrid.eps}
+%     \includegraphics[width=0.95\textwidth]{figures/sizes_v_hybrid.eps}
+        
+%     \caption{Focal sizes obtained by hybrid ray tracing method, for two slit aperture cases, compared with 1D Model (WOFRY). Analytical values are same as Figure \ref{fig:focalSizes}. 
+%     % Numerical values \ingreen{green} are obtained for the slit (upstream lens 1) either open or closed to $a$~= \SI{25}{\micro\meter}.
+%     }
+%     \label{fig:focalSizes_hybrid}
+% \end{figure}
+
+
+
+
 \section{Discussion}
 \label{sec:discussion}
 
@@ -696,14 +712,32 @@ Methods:
     \item wave optics simulations using the three methods (Wofry1D, COMSYL and SRW) give the same results within a \todo{10\%??} discrepancies. This is a validation than the newly proposed method Wofry1D produces reliable results in a much shorter calculation time \todo{table/discussion on CPU usage?}. Note that these numerical values depend not only on the method used, but on the particular specific parameters in each method (number of pixels for sampling, zoom factor in propagation, etc.). However, the agreement is very good in terms not only of numerical values but also in the shape of intensity distributions (compare Figs. XX).
     \item \todo{discuss hybrid results: it would be reasonable to get good numerical values for cases 1 and 2 (high coherence) but not so good in the case of moderate coherence}
     \item \todo{Discuss GSM in two cases: i) GSM source and full beamline, and ii) GSM source and Gaussian slit}
-    
 \end{itemize}
 
 Miscellaneous: 
 \begin{itemize}
     \item To get similar size, prefer a large $f_1$ to avoid too large illumination in lens2. 
     \item \todo{briefly discuss correction to the thermal load by M1 and DCM. Check correction of the fitted curvature and degradation by the residual errors}
+    \item{\todo{compare flux values with all methods: }}
+    \item discuss the real combination of lenses that will be used to match the R in the simulations. Justify the approximation of using a single lens with a given R. 
+    \item run times comparison
 \end{itemize}
+
+\begin{table}[]
+    \label{table:absorption}
+    \caption{Comparison of beam intensity attenuation in percent by the slit, lens 1 and lens2.
+    \todo{SRW calculations are single electron, using diameter 1mm and thickness 30 um TO UPGRADE...}
+    \todo{remove this table?}
+    }
+    \centering
+    \begin{tabular}{c|c|c|c|c}
+case  & Wofry1D & COMSYL  & SRW& Hybrid \\
+1     & 0       & 0       & 96.7,4.4,16.7   & 0 \\
+2     & 0       & 0       & 96.7,3.5,2.4   & 0 \\
+3     & 0       & 0       & 85.4,3.6,10.1   & 0 \\
+4     & 0       & 0       & 85.4,5.4,2.6    & 0 
+    \end{tabular}
+\end{table}
 
 \section{Summary and conclusions}
 \label{sec:summary}
@@ -720,7 +754,7 @@ Numerical calculations for this work have been done using a newly developed meth
 \appendix
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{The Gaussian Shell-model and its use to approximate undulator sources}
+\section{The Coherent Fraction predicted by the Gaussian Shell-model and its aplication to approximate undulator sources}
 \label{appendix:matchCF}
 The Gaussian Shell-model is a case for partial coherent beams well know in optics, as it models quite well the lasers beams, and it is analytic. It is a 1-dimensional where both the spectral density (intensity distribution) and the degree of transverse coherence between two points follow Gaussian distributions, described by standard deviations $\sigma_I$ and $\sigma_{\mu}$, respectively. The cross spectral density is
 \begin{equation}
@@ -927,8 +961,23 @@ ii) For low coherence the GSM may work, in particular when using the aperture $\
     }
 \end{figure}
 
-\section{Two lenses: results by Hybrid}
+\section{SRW results for pairing two lenses}
+\label{appendix:srw}
+xxxx
+
+\section{Hybrid results for pairing two lenses}
 \label{appendix:hybrid}
+
+\begin{figure}
+    \centering
+
+    \includegraphics[width=0.95\textwidth]{figures/sizes_h_hybrid.eps}
+    \includegraphics[width=0.95\textwidth]{figures/sizes_v_hybrid.eps}
+        
+    \caption{Focal sizes obtained by hybrid ray tracing method, for two slit aperture cases, compared with 1D Model (WOFRY). Analytical values are same as Figure \ref{fig:focalSizes}. 
+    }
+    \label{fig:focalSizes_hybrid}
+\end{figure}
 
 % %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % \section{OLD PART FOR ONE LENS}
