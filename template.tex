@@ -674,11 +674,6 @@ We can conclude that the hybrid ray tracing is a valid method to obtain good val
 
 \newpage
 
-
-
-
-
-
 % \begin{figure}
 %     \centering
 %     % \includegraphics[width=0.95\textwidth]{figures/Figure_magnification_99.png}
@@ -699,7 +694,8 @@ We can conclude that the hybrid ray tracing is a valid method to obtain good val
 \section{Discussion}
 \label{sec:discussion}
 
-Complex trajectories: 
+\subsection{complexity of setting and f1 f2 trajectories}
+
 
 \begin{itemize}
     \item Looking at Fig.~\ref{fig:f1f2map}a we observe an asymptotic approach (for $f1<$~\SI{25}{\meter} or $f1>$~\SI{70}{\meter}) of the numerical results to geometrical optics results, mostly with source at the ID, but sometimes (with closed slit) to the case of the source at the slit position. However, this case is obtained in H with a reasonable aperture $a=$~\SI{40.4}{\micro\meter}, a value of interest in real cases (to get $CF_h=$90\%) but with a less interesting aperture in V $a=$~\SI{25}{\micro\meter}, because high coherence can be obtained with more opened slits without compromising transmission. 
@@ -710,21 +706,28 @@ Complex trajectories:
 
 
     
-Methods:
+\subsection{methods}
+
 \begin{itemize}
     \item wave optics simulations using the three methods (Wofry1D, COMSYL and SRW) give the same results within a \todo{10\%??} discrepancies. This is a validation than the newly proposed method Wofry1D produces reliable results in a much shorter calculation time \todo{table/discussion on CPU usage?}. Note that these numerical values depend not only on the method used, but on the particular specific parameters in each method (number of pixels for sampling, zoom factor in propagation, etc.). However, the agreement is very good in terms not only of numerical values but also in the shape of intensity distributions (compare Figs. XX).
     \item \todo{discuss hybrid results: it would be reasonable to get good numerical values for cases 1 and 2 (high coherence) but not so good in the case of moderate coherence}
-    \item \todo{Discuss GSM in two cases: i) GSM source and full beamline, and ii) GSM source and Gaussian slit}
+    \item run times comparison
+    % \item \todo{Discuss GSM in two cases: i) GSM source and full beamline, and ii) GSM source and Gaussian slit}
 \end{itemize}
 
-Miscellaneous: 
+\subsection{Further simulations}
+
 \begin{itemize}
-    \item To get similar size, prefer a large $f_1$ to avoid too large illumination in lens2. 
-    \item \todo{briefly discuss correction to the thermal load by M1 and DCM. Check correction of the fitted curvature and degradation by the residual errors}
     \item{\todo{compare flux values with all methods: }}
+    
+    \item \todo{briefly discuss correction to the thermal load by M1 and DCM. Check correction of the fitted curvature and degradation by the residual errors}
+    
     \item discuss the real combination of lenses that will be used to match the R in the simulations. Justify the approximation of using a single lens with a given R. 
-    \item run times comparison
+    
+    \item Out of resonance discussion
+    
 \end{itemize}
+
 
 \begin{table}[]
     \label{table:absorption}
@@ -741,6 +744,17 @@ case  & Wofry1D & COMSYL  & SRW& Hybrid \\
 4     & 0       & 0       & 85.4,5.4,2.6    & 0 
     \end{tabular}
 \end{table}
+
+
+\subsection{Tips to experimentalists}
+
+\begin{itemize}
+    \item Useful plots: CF vs slit size, trajectories, size. Simulated ones, create similar look-up tables. Digital twin. 
+    \item To get similar size, prefer a large $f_1$ to avoid too large illumination in lens2.
+    \item Lens granularity
+\end{itemize}
+
+
 
 \section{Summary and conclusions}
 \label{sec:summary}
