@@ -169,7 +169,7 @@ From these arguments, it is now natural to rigorously define Coherent Fraction (
 
 The eigenvalues and the coherent modes are obtained by performing the Coherent mode decomposition (CMD). They are solution of the homogeneous Fredholm integral equation of second kind \cite{glass2017}. This is an eigenvalue problem. The numerical solution is obtained from the diagonalization of the CSD, which is a multivariate tensor when sampled at the point coordinates. This diagonalization problem is solved in 2D (i.e., $W_{2D}$ is a function of 4 variables) using complex numerical algorithms implemented in COMSYL. Fortunately, in 1D, the CSD is a function of two variables, represented in a matrix that can be easily diagonalized using standard tools availables in python-numpy. The numerical calculation of $W(x_1,x_2)$ uses Kim's convolution theorem \cite{kim1986b} as described in \cite{glass2017}. It includes two ingredients: i) the statistical parameters of the electron beam at the undulator center (sizes and divergences), and ii) the intensity distribution of the undulator emission at the undulator center. The undulator emission is calculated in a plane far enough from the undulator using classical electrodynamics \cite{jackson} (as implemented in the pySRU python library \cite{pySRU}), and then backpropagated (using a Fresnel propagator) to the center of the undulator. 
 
-It is important to calculate the real emission of the undulator which is very different than a Gaussian. However, the (inadequate) use of a Gaussian approximation for the undulator radiation is often found in literature, e.g.  \cite{coisson1997}. In this case the Kim convolution predicts a CSD that is identical to the Gaussian Shell-method (GSM). Parameters of the undulator approximated by a GSM can be calculating by matching the coherent as explained in Appendix \ref{appendix:matchCF}). There is another argument in favour of using non-approximated coherent modes: small differences in a mode in terms of shape (even maintaining the same FWHM) may give to completely different results after propagation. Moreover, the GSM modes are real functions (constant phase) whereas the modes from CMD of undulator sources are complex functions (with a non-constant phase).
+It is important to calculate the real emission of the undulator which is very different than a Gaussian. However, the (inadequate) use of a Gaussian approximation for the undulator radiation is often found in literature, e.g.  \cite{coisson1997}. In this case the Kim convolution predicts a CSD that is identical to the Gaussian Shell-method (GSM). There is another argument in favour of using non-approximated coherent modes: small differences in a mode in terms of shape (even maintaining the same FWHM) may give to completely different results after propagation. Moreover, the GSM modes are real functions (constant phase) whereas the modes from CMD of undulator sources are complex functions (with a non-constant phase).
 
 The interest of the coherent mode decomposition method is twofold: the possibility to propagate a partial coherent beam along the beamline by just propagating a few modes (less modes for a more coherent beam) which behave like coherent wavefronts, and the use of the coherent fraction (a scalar parameter) as a accurate well-defined measure of how coherent is the beam at any position of the beamline.
 
@@ -368,7 +368,7 @@ $a_v$=~\SI{506.7}{\milli\meter}. The case of the ``open" slit that does not crop
 
 Figure~\ref{fig:oneTFundPartialCoherence} shows the focal size along the optical axis for these apertures in the horizontal and vertical planes. We have calculated the case of the partially coherent beam (multi-mode) with the case of fully coherent beam (only the first coherent mode). We observe that the focal positions (the minima of the plot lines) do not change significantly when comparing the partially coherent and the full coherent beam. However, the focal dimension changes significatively in the case of low coherence (e.g., in the cases $CF_h\le$70\%). In the vertical, where the source much more coherent (58\%) there is no differences in sized when going from partial to fully coherent beams. Looking to the focal position shift versus sllit aperture we find important differences in the horizontal and vertical. In the horizontal, the cropping of the beam by the slit is important as we need to increase the $CF_h$ from the source (13\%) to values required by the experiments, usually larger than 50\%. This produces a gradual shift of the focal position from the position of the geometrical image of the ID source (black line in panel a)) to the geometrical image of the slit (red line in panel a)). However, in the vertical plane, the slit crops the beam only slightly, and closing the slit to go from the source $CF_v$=58\% to values up to 90\% do not produce any focal shift from the  position of the geometrical image of the ID source. Only when the slit is very much closed (e.g., $a_v$=~\SI{25}{\micro\meter}, red curve) the focal position shifts to the geometrical image of the slit. This case is in principle not interesting experimentally as it reduces the intensity from an already quite coherent beam ($CF_v$=90\%). 
 
-In this section, we have supposed that the 2D beam can be separated in two 1D beams, for H and V directions. No other approximations were made: we used the full undulator source, performed coherent mode decomposition, used an aperture with a rectangular function, and used a Be lens with the real parabolic profile (with thickness $t=$~\SI{50}{\micro\meter} and aperture \SI{1}{\milli\meter}). Some of these factors could be relaxed, for example using Gaussian sources (and GSM decomposition), slits with absorption by Gaussians, and ideal lenses. In Appendix \ref{appendix:comparison} we have studied the resulting beam evolution considering these approximations. We also noticed that ray-tracing using the hybrid method \cite{codeHYBRID} give similar results (this will be discussed in section \ref{sec:discussion}). 
+In this section, we have supposed that the 2D beam can be separated in two 1D beams, for H and V directions. No other approximations were made: we used the full undulator source, performed coherent mode decomposition, used an aperture with a rectangular function, and used a Be lens with the real parabolic profile (with thickness $t=$~\SI{50}{\micro\meter} and aperture \SI{1}{\milli\meter}). Some of these factors could be relaxed, for example using slits with absorption by Gaussians, and ideal lenses. In Appendix \ref{appendix:comparison} we have studied the resulting beam evolution considering these approximations. We also noticed that ray-tracing using the hybrid method \cite{codeHYBRID} give similar results (this will be discussed in section \ref{sec:discussion}). 
 
 \section{Pairing two transfocators}
 
@@ -666,9 +666,6 @@ The wave optics simulations using the three methods (Wofry1D, COMSYL and SRW) gi
 
 \todo{run times comparison. Table?}
 
-    % \item \todo{Discuss GSM in two cases: i) GSM source and full beamline, and ii) GSM source and Gaussian slit}
-
-
 \subsection{Further simulations}
 
 \begin{itemize}
@@ -727,156 +724,15 @@ Numerical calculations for this work have been done using a newly developed meth
 
 % This method is based on the separated analysis of the horizontal and vertical directions (1D model). The results are compared with fully 2D methods (SHADOW hybrid \cite{XX}, SRW \cite{XX}, COMSYL \cite{XX}). We apply the results to the study of a two transfocator system that is being designed for the new ID18 beamline at the upgraded EBS-ESRF \cite{XX}.  
 
+\newpage
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \appendix
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{The Coherent Fraction predicted by the Gaussian Shell-model and its aplication to approximate undulator sources}
-\label{appendix:matchCF}
-The Gaussian Shell-model is a case for partial coherent beams well know in optics, as it models quite well the lasers beams, and it is analytic. It is a 1-dimensional where both the spectral density (intensity distribution) and the degree of transverse coherence between two points follow Gaussian distributions, described by standard deviations $\sigma_I$ and $\sigma_{\mu}$, respectively. The cross spectral density is
-\begin{equation}
-W(x_1,x_2,\omega) = A^2 e^{-(x_1^2+x_2^2)/(4 \sigma_I^2)} e^{-(x_2-x_1)^2/(2 \sigma_{\mu}^2)}
-\label{GS_CSD}
-\end{equation}
-with $A$, $\sigma_I$ and $\sigma_{\mu}$ positive constants that depend on $\omega$.
-This cross spectral density can be decomposed in coherent modes
-\cite{Starikov82,mandel_wolf} 
-\begin{equation}
-W(x_1,x_2,\omega) = \sum_{n=0}^{\infty} \lambda_n(\omega) \Phi^*(x_1,\omega) \Phi(x_2,\omega). 
-\label{CMD}
-\end{equation}
-The $\lambda_n$ (eigenvalues) are
-\begin{align}
-\lambda_0 &= A \sqrt{\pi/( a+b+c)}; \\ 
-\lambda_n &= \lambda_0 q ^n,
-\end{align}
-with $a = (4 \sigma_I^2)^{-1}$, $ 
-b = (2 \sigma_{\mu}^2)^{-1}$, $ 
-c = (a^2 + 2 a b)^{1/2}$,
-\begin{equation}
-q = \frac{1}{1 + \beta^2/2 + \beta\sqrt{(\beta/2)^2+1}} 
-\label{q}
-\end{equation}
-and $\beta=\sigma_{\mu}/\sigma_I$. 
 
-The eigenfunctions are
-\begin{equation}
-\Phi_n(x) = \left( \frac{2c}{\pi} \right)^{1/4} \frac{1}{\sqrt{2^n n!}} H_n(x\sqrt{2c})e^{-cx^2}
-\label{GSeigenvalues}
-\end{equation}
-with $H_n$ are the physicist's Hermite polynomials of order $n$. 
-
-The occupation of coherent modes, or normalized eigenvalues is   
-\begin{equation}
-\eta_n = \frac{\lambda_n}{\sum_{i=0}^{\infty} \lambda_i} = q^n(1-q), 
-\end{equation}
-thus the coherent fraction is $CF=\eta_0=1-q$, and the cumulated occupancy
-\begin{equation}
-\ \sum_{i=0}^{n-1} \eta_i = 1-q^n. 
-\end{equation}
-From here one can calculate the number of modes needed to reach a cumulated occupancy $c_0$, which is $n=\ln(1-c_0)/\ln q$.
-
-For representing the undulator radiation by a GSM, we need to obtain the $\sigma_I$ and $\sigma_\mu$ values. The intensity $\sigma_I$ matches the intensity distribution of the undulator source that is usually approximated as the convolution of the electron bunch size $\sigma_x$ with the radiation cross section $\sigma_u$. The other GSM value is $\sigma_\mu=\beta\sigma_I$, and $\beta$ is obtained via $q$ by matching the GSM coherence fraction $CF=1-q$ with the undulator coherence fraction approximated by
-\begin{equation}
-    CF_u = \frac{\sigma_u\sigma_{u'}}{\sqrt{\sigma_x^2+\sigma_u^2}\sqrt{\sigma_{x'}^2+\sigma_{u'}^2}}.
-\end{equation}
-Therefore, the GSM $\beta$ is obtained by $\beta=CF_u/\sqrt{1-CF_u}$,
-and the radiation parameters are $\sigma_{u'}=\sqrt{\lambda/(2L)}$, $L$ the undulator length and $\sigma_u \sigma_{u'} \approx \lambda / (2 \pi)$.
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\section{Validity of GSM for coherent mode decomposition of undulator radiation}
-\label{appendix:validity}
-
-We have calculated here the coherent mode decomposition for the U2 undulator (N=100, K=1.19) at the EBS storage ring. 
-
-In a first step the coherent mode decomposition of the undulator radiation has been performed using a 1D model. The results are compared with the GSM approximation. Results for the horizontal direction are in (Fig.~\ref{fig:GSMvsUND-H}) in (Fig.~\ref{fig:GSMvsUND-V}) for the vertical one. As expected, these figures shows that the GASm is a good approximation for cases where the coherence fraction is small (the horizontal case) but the results are very different, in particular the eigenfunctions, in the case of high coherence (vertical direction in Fig.~\ref{fig:GSMvsUND-V}).
-
-
-\begin{figure}
-    \centering
-    \includegraphics[width=0.49\textwidth]{figures/comparison_H_CSD_GSM.png}
-    \includegraphics[width=0.49\textwidth]{figures/comparison_H_CSD_U.png}
-    \includegraphics[width=0.59\textwidth]{figures/comparison_H_SD.png}
-    \includegraphics[width=0.49\textwidth]{figures/comparison_H_eigenvector0.png}
-    \includegraphics[width=0.49\textwidth]{figures/comparison_H_eigenvector1.png}
-    \includegraphics[width=0.49\textwidth]{figures/comparison_H_eigenvector2.png}
-    \includegraphics[width=0.49\textwidth]{figures/comparison_H_eigenvector3.png}
-        
-    \caption{Comparison of the approximated (GSM) and exact (1D WOFRY) coherent mode decomposition  for the Horizontal direction of a U20 undulator of length \SI{2}{\meter},  set to resonance at 10 keV photon. energy. The plot show the Cross Spectral Deisity, Spectral Density, and four first modes. The Coherence Fraction is 0.088}
-    \label{fig:GSMvsUND-H}
-\end{figure}
-
-
-\begin{figure}
-    \centering
-    \includegraphics[width=0.49\textwidth]{figures/comparison_V_CSD_GSM.png}
-    \includegraphics[width=0.49\textwidth]{figures/comparison_V_CSD_U.png}
-    \includegraphics[width=0.59\textwidth]{figures/comparison_V_SD.png}
-    \includegraphics[width=0.49\textwidth]{figures/comparison_V_eigenvector0.png}
-    \includegraphics[width=0.49\textwidth]{figures/comparison_V_eigenvector1.png}
-    \includegraphics[width=0.49\textwidth]{figures/comparison_V_eigenvector2.png}
-    \includegraphics[width=0.49\textwidth]{figures/comparison_V_eigenvector3.png}
-        
-    \caption{The same as Fig.~\ref{fig:GSMvsUND-H} but for the vertical direction. The Coherence Fraction is 0.665}
-    \label{fig:GSMvsUND-V}
-\end{figure}
-
-
-
-Next step is the analysis of the separability in horizontal and vertical. In Fig.~\ref{fig:GSMvsCOMSYL} we compare the coherent fraction calculated with COMSYL \cite{comsyl} and approximated by GSM (as shown in Appendix~\ref{sec:appendixA}). It shows that the GSM approximated well an undulator only for the fist modes. The Coherent Fraction (first mode) matches very well. This is due to the fact that the GSM approximation to the undulator is built matching the CF. The occupancy of higher modes differ: the first 50 GSM modes GSM to contain more than 99\% of the spectral density, but XX are needed for the numerical coherent mode decomposition with COMSYL. This means significative errors in the eigenvalues when using GSM. 
-
-\todo{Compare COMSYL with H+V combination of WOFRY1D modes}
-
-
-\begin{figure}
-    \centering
-    \includegraphics[width=0.95\textwidth]{figures/FigureGSMvsCOMSYL.png}
-    \caption{Comparison of the approximated (GSM) and exact (COMSYL) cumulated occupation of the coherent modes for an undulator U20, of length \SI{2}{\meter}, and set to resonance at 10 keV photon. energy.}
-    \label{fig:GSMvsCOMSYL}
-\end{figure}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Testing the effect of a slit in the GSM}
-\label{appendix:slit}
-
-In many cases the use of the GSM supposes that during propagation over the beamline elements the beam keeps its Gaussian Shell-model nature. This is true for propagation in free space, and probably true for focusing with ideal lenses. But, in the case of slits that crop the beam, it is difficult to believe that the beam is still Gaussian. Moreover, the new beam parameters $\sigma_{I'}$ and $\sigma_{\xi'}$ are obtained supposing the slit has a width $\sigma_s$, applying
-\begin{equation}
-    \frac{1}{\sigma_{I'}^2} = 
-    \frac{1}{\sigma_{I}^2} +
-    \frac{1}{\sigma_{s}^2},
-\end{equation}
-and
-\begin{equation}
-    \sigma_{\xi'} = \sigma_{\xi} 
-\end{equation}
-
-However, there are several recipes for the relation between $\sigma_s$ and the slit aperture $A$: $\sigma_s=A/4.1$, $\sigma_s=A/2.355$ and $\sigma_s=A/\sqrt{12}$.
-
-We have calculated the case of a Gaussian beam that is cropped by a slit. The exact calculation is compared with the GSM results using the different recipes. We have used $\sigma_x$~= \SI{30}{\micro\meter} (like for the H EBS source) and three possible values of $\beta$: quite incoherent ($\beta=0.02$), medium coherence ($\beta=0.09$) and quite coherent ($\beta=1.15$). The results are in Fig.~\ref{fig:GSMslit} where the CF is compared for the exact calculation and the GSM approximation. We remind that the CF for the GSM is $CF = 1 - q$, with $q$ given in equation~\ref{q}.
-The source has been created using the GSM model with a sufficient number of modes to include more that 99\% of the spectral density. Each mode is cropped by the slit placed at the source position. The Cross Spectral Density $W$ is calculated in the usual way 
-\begin{equation}
-    W(x_1,x_2) = \sum \lambda_i \Phi^*(x_1) \Phi(x_2),     
-\end{equation}
-with $\lambda_i$ the eigenvalues of the source and $\Phi(x_{1,2})$ are the eigenvectors of the source cropped by the slit. After re-diagonalizing $W$, the new eigenvalues $\lambda_i'$ permit to calculate the exact CF: 
-\begin{equation}
-    CF = \frac{\lambda_0'}{\sum \lambda_i'}
-\end{equation}
-
-The results in Fig.~\ref{fig:GSMslit} show two important things:
-i) the GSM model usually overestimates CF in particular for high coherence ($\beta=1.15$), where there are important discrepancies between GSM and the exact calculation.
-ii) For low coherence the GSM may work, in particular when using the aperture $\sigma_s=A/2.355$, i.e., matching the Gaussian FWHM with the total aperture.
-
-\begin{figure}
-    \centering
-    \includegraphics[width=0.95\textwidth]{figures/Figure_1a.png}
-    \includegraphics[width=0.95\textwidth]{figures/Figure_1b.png}
-    \includegraphics[width=0.95\textwidth]{figures/Figure_1c.png}
-    \caption{Calculation of the coherence fraction f a Gaussian beam cropped by a slit. The exact numerical laculation (blue line) is compared with the approzimations that the beam is still described by a GSM with three possible ways to calculate the slit ``Gaussianized" $\sigma_s$ (see text). }
-    \label{fig:GSMslit}
-\end{figure}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{One lens: comparison of methods}
