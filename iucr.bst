@@ -332,12 +332,13 @@ MACRO {toois} {"ACM Transactions on Office Information Systems"}
 MACRO {toplas} {"ACM Transactions on Programming Languages and Systems"}
 MACRO {tcs} {"Theoretical Computer Science"}
 
-FUNCTION {write.url}
-{ URL empty$
-    { skip$ }
-    { "\newline\harvardurl{" URL * "}" * write$ newline$ }
-  if$
-}
+FUNCTION {write.url}    #RC210901 - omits URL for a cleaner bibliography
+{}
+%{ URL empty$
+%    { skip$ }
+%    { "\newline\harvardurl{" URL * "}" * write$ newline$ }
+%  if$
+%}
 
 INTEGERS { nameptr namesleft numnames }
 
