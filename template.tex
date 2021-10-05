@@ -66,7 +66,7 @@
      % The title of the paper. Use \shorttitle to indicate an abbreviated title
      % for use in running heads (you will need to uncomment it).
 
-\title{Pairing transfocators in undulator beamlines at low-emittance storage rings}
+\title{Pairing transfocators under partially coherent x-ray beams}
 %\shorttitle{Short Title}
 
      % Authors' names and addresses. Use \cauthor for the main (contact) author.
@@ -115,7 +115,7 @@ We simulate the focusing of partial coherent beams produced by fourth-generation
 \end{synopsis}
 
 \begin{abstract}
-We simulate the focusing of partial coherent beams produced by fourth-generation storage rings. We used a new software tool to perform coherent mode decomposition of the undulator radiation in 1D. The analysis of a focusing system based on x-ray lenses, shows the shift and degradation of the focus when the numerical aperture is severely reduced by a slit. The pairing of two transfocators to assure a fixed focal position is studied in terms of beam sizes and coherent fraction. The results show that the synchrotron source imaged by two paired undulators is highly dependent on the aperture used to control the coherence fraction, and simple concepts based on geometrical optics cannot be applied. 
+We simulate the focusing of partial coherent beams produced by fourth-generation storage rings. We used a new software tool to perform coherent mode decomposition of the undulator radiation in 1D. The analysis of a focusing system based on x-ray lenses, shows the shift and degradation of the focus when the numerical aperture is reduced by a slit. The pairing of two transfocators to assure a fixed focal position is studied in terms of beam sizes and coherent fraction. The results show that the synchrotron source imaged by two paired undulators is highly dependent on the aperture used to control the coherence fraction, and simple concepts based on geometrical optics cannot be applied. 
 \end{abstract}
 
 
@@ -131,7 +131,7 @@ We simulate the focusing of partial coherent beams produced by fourth-generation
 
 Recent fourth-generation storage-ring-based X-ray synchrotron sources deliver photon beams with high brilliance and coherence. The transversal coherence of these beams is highly improved, in particular in the horizontal direction, with respect to previous 3$^{\text{rd}}$ generation sources. This has a beneficial impact for many applications requiring coherent beams, such as X-ray photon correlation spectroscopy, coherent diffraction imaging, propagation-based phase-contrast imaging, and ptychography (see, e.g. \cite{paganin_book}). On the other side, preserving wavefront quality requires better quality materials and optical surfaces in the active beamline components such as mirrors, gratings, crystals and lenses \cite{Yabashi, Roth2017}. Moreover, the interaction of the coherent beam with the optical elements produce diffraction that do affect their focusing power and resolving power of these elements. Let us consider, for example, the case of an ideally focusing system of focal length $f$ made by a mirror or lens that focuses the source into the image plane. The position of the focus with respect to the focusing element $q$ can be estimated by the lens equation $f^{-1}=p^{-1}+q^{-1}$, with $p$ the source-element distance. If the beam numerical aperture (NA) is reduced (for example by the finite dimension of the lens, mirror or by using a slit) the position and also the dimensions of the focal point changes due to diffraction. It has been shown \cite{Tanaka:85} that the focal position created by a Gaussian beam ``moves" towards the lens position when NA reduces. This shifting of the focal position is also relevant for synchrotron beamlines, as demonstrated by \citeasnoun{westfahl}. These authors noticed a shift of the horizontal focal position upstream from the position given by geometrical optics (see Fig. 7 in \citeasnoun{westfahl}) when the horizontal acceptance is reduced by a slit. Their numeric results from wavefront propagation using SRW \cite{codeSRW} including partial coherence agree with an analytical Gaussian Shell-model.
 
-The diffraction effect at the slits and finite acceptance of the elements not only shifts the focal point, but also changes the focal dimensions, as we will see later. These facts are critical when designing beamlines with several coupled focusing elements. We study this phenomenon applied to the project for the new ID18 beamline at the upgraded EBS-ESRF storage ring. This beamline will produce highly coherent beams of variable cross section at the sample position. Two refractive systems (transfocators) are paired to allow a varying focal size, whereas a slit placed upstream from the transfocators is used to control the coherent fraction. The optical matching of the transfocators is studied in detail, and it is strongly correlated with the slit aperture (or coherent fraction). To study the performances of such systems a new algorithm for coherent mode decomposition (CMD) of the undulator beams has been developed. This method is very fast allowing parametric simulations in a common laptop.
+The diffraction effect at the slits and finite size of the optical elements not only shifts the focal point, but also changes the focal dimensions, as we will see later. These facts are critical when designing beamlines with several coupled focusing elements. We study this phenomenon applied to the project for the new ID18 beamline at the upgraded EBS-ESRF storage ring. This beamline will produce highly coherent beams of variable cross section at the sample position. Two refractive systems (transfocators) are paired to allow a varying focal size, whereas a slit placed upstream from the transfocators is used to control the coherent fraction. The optical matching of the transfocators is studied in detail, and it is strongly correlated with the slit aperture (or coherent fraction). To study the performances of such systems a new algorithm for coherent mode decomposition (CMD) of the undulator beams has been developed. This method is very fast allowing parametric simulations in a common laptop.
 
 The high efficiency of the CMD software developed is obtained by implementing a 1D model, therefore studying separately the horizontal and vertical planes. The results of this model are verified against 2D models using Monte-Carlo multielectron propagation with SRW and also 2D coherent mode decomposition with COMSYL \cite{codeCOMSYL}. It is also found that ray-tracing simulations using the ``hybrid" method \cite{codeHYBRID} give good approximations to the correct results for these systems. 
 
@@ -146,13 +146,13 @@ The tools developed here are included in the OASYS toolbox \cite{codeOASYS}, ava
 
 \subsection{Modeling the partial coherent emission of an undulator beam using coherent mode decomposition}
 
-The electrons in a storage ring are statistically distributed, following (in a very good approximation) a Gaussian distribution in a 6-dimensional space (three spatial coordinates, two angles to define direction, and the electron energy). The radiation of the individual electrons will add incoherently for wavelengths smaller than the bunch lengths. This is the usual case for X-rays produced by storage ring-based sources, but not for free electron lasers. Therefore, each electron creates a wavefront (fully coherent and strictly monochromatic) for a given photon energy. The consequence is that the overall radiation cannot be described deterministically which implies that statistical methods are needed, like for describing the electron beam. This is the origin of partial coherence of the synchrotron emission. In an ideal storage ring of zero emittance, the electrons follow a filament beam so the emission by an insertion device (ID) would be fully coherent. When electron emittance is considered, the electrons contributing to the radiation have different initial conditions (in the 6-dimensional space) and the overall emission cannot be describe by a single wavefront, but by statistically distributed wavefronts, described by partial coherent optics.
+The electrons in a storage ring are statistically distributed, following in good approximation a Gaussian distribution in a 6-dimensional space (three spatial coordinates, two angles to define direction, and the electron energy). The radiation of the individual electrons will add incoherently for wavelengths smaller than the bunch lengths. This is the usual case for X-rays produced by storage ring-based sources, but not for free electron lasers. Therefore, each electron creates a wavefront (fully coherent) associated at a given photon energy. As a consequence, the overall radiation cannot be described deterministically. Statistical methods are then needed, like for describing the electron beam. This is the origin of partial coherence of the synchrotron emission. In an ideal storage ring of zero emittance, the electrons follow a filament beam so the emission by an insertion device (ID) would be fully coherent. When electron emittance is considered, the electrons contributing to the radiation have different initial conditions (in the 6-dimensional space) and the overall emission cannot be describe by a single wavefront, but by statistically distributed wavefronts, described by partial coherent optics.
 
-The radiation is 'wide sense stationary' \cite{mandel_wolf} if it verifies some conditions, which are satisfied for light emitted by storage rings (but not for XFELs) \cite{geloni2008}. These conditions can be summarized as
+The radiation is ``wide sense stationary" \cite{mandel_wolf} if it verifies some conditions, usually satisfied for light emitted by storage rings, but not for XFELs \cite{geloni2008}. These conditions can be summarized as
 i) the electron bunch length being long enough (several times larger than the emitted wavelength),
 ii) radiation is monochromatized 'not too much' (like by standard monochromators), and 
 iii) the radiation frequency being large enough.
-It is in this case all the coherent properties of the radiation can be described using $W$, the 'cross spectral density' (CSD), a complex function that measures the correlation of the electric field $E$ in two different spatial points at a given radiation frequency $\omega$. It can be mapped in a $(x,y)$ plane at a third coordinate $z$. At that plane, the CSD depends on 5 variables: 
+It is in this case all the coherent properties of the radiation can be described using $W$, the ``cross spectral density" (CSD), a complex function that measures the correlation of the electric field $E$ in two different spatial points at a given radiation frequency $\omega$. It can be mapped in a $(x,y)$ plane at a third coordinate $z$. At that plane, the CSD depends on 5 variables: 
 
 \begin{equation}
 W_{2D}(x_1,y_1,x_2,y_2;\omega) = <E^*(x_1,y_1;\omega) E(x_2,y_2;\omega)>
@@ -167,7 +167,7 @@ W_{2D}(x_1,y_1,x_2,y_2;\omega) = W(x_1,x_2;\omega) W(y_1,y_2;\omega).
 \end{equation}
 Each $W$ function is treated separately in a similar way affecting the $x$ (horizontal) and $y$ (vertical) coordinate.
 
-From the cross spectral density one can calculate the 'spectral density' (usually simply called 'intensity') $I(x;\omega)=W(x,x,\omega)$, and also the complex degree of (transverse) coherence: 
+From the cross spectral density one can calculate the ``spectral density" (usually simply called ``intensity") $I(x;\omega)=W(x,x,\omega)$, and also the complex degree of (transverse) coherence: 
 \begin{equation}
 \mu(x_1,x_2;\omega) = \frac{W(x_1,x_2;\omega)}{\sqrt{I(x_1;\omega)}\sqrt{I(x_2;\omega)}}
 \label{eq:DTC}
@@ -181,7 +181,8 @@ W(x_1,x_2;\omega) = \sum_{n=0}^{\infty} \lambda_n(\omega) \Phi_n^*(x_1;\omega) \
 \label{eq:CMD}
 \end{equation}
 where $\lambda_n$ (eigenvalues) are the intensity weights and the $\Phi_n$ are the complex coherent modes (eigenfunctions). 
-Some important characteristics of this coherent mode decomposition are \cite{mandel_wolf}: i) the modes are orthonormal (in the integral sense), ii) the modes maximize the spectral density, the first mode is more intense than the second, and so on, meaning that the truncated expansion is optimal, and iii) there is complete coherence if and only if there is only a single mode. If one can truncate the infinite series to a limited number of modes $N$ which contain a good percentage of the spectral density, the numerical storage of the $N$ modes that depend on one spatial variables in 1D (two in 2D) is more economic than the storage of the cross spectral density $W$ that depends on two variables (4 variables for $W_{2D}$). 
+Some important characteristics of this coherent mode decomposition are \cite{mandel_wolf}: i) the modes are orthonormal (in the integral sense), ii) the modes maximize the spectral density, the first mode is more intense than the second, and so on, meaning that the truncated expansion is optimal, and iii) there is complete coherence if and only if there is only a single mode.
+In case of beams with good coherence, the infinite series can be truncated to a limited number of modes $N$, which are functions of one (two) spatial variables in 1D (2D). The numerical storage of the $N$ modes is more economic than the storage of the cross spectral density $W$ that depends on two variables (4 variables for $W_{2D}$). 
 The eigenvalues $\lambda_n$ are a measure of the intensity. Indeed, one can define the occupation $\eta$ of the i-th mode as the ratio of its intensity to the total intensity: 
 \begin{equation}
 \label{eq:occupation}
@@ -189,9 +190,9 @@ The eigenvalues $\lambda_n$ are a measure of the intensity. Indeed, one can defi
 \end{equation}
 From these arguments, it is now natural to rigorously define Coherent Fraction ($CF$) as the occupation of the first coherent mode: $CF=\eta_0$.
 
-The eigenvalues and the coherent modes are obtained by performing the coherent mode decomposition (CMD). They are the solution of the homogeneous Fredholm integral equation of second kind \cite{glass2017}. This is an eigenvalue problem. The numerical solution is obtained from the diagonalization of the CSD, which is a multivariate tensor when sampled at the point coordinates. This diagonalization problem is solved in 2D (i.e., $W_{2D}$ is a function of 4 variables) using complex numerical algorithms implemented in COMSYL. Fortunately, in 1D the CSD is a function of two variables, represented in a matrix that can be easily diagonalized using standard tools availables in python-numpy. The construction of $W(x_1,x_2)$ uses Kim's convolution theorem \cite{kim1986b} as described in \citeasnoun{glass2017}. It includes two ingredients: i) the statistical parameters of the electron beam at the undulator center (sizes and divergences), and ii) the intensity distribution of the undulator emission at the undulator center. The undulator emission is calculated in a plane far enough from the undulator using classical electrodynamics \cite{jackson} (as implemented in the pySRU python library \cite{pySRU}), and then backpropagated (using a Fresnel propagator) to the center of the undulator. 
+The eigenvalues and the coherent modes are obtained by performing the coherent mode decomposition (CMD). They are the solution of the homogeneous Fredholm integral equation of second kind, an eigenvalue problem \cite{glass2017}. The numerical solution is obtained from the diagonalization of the CSD, which is a multivariate tensor when sampled at the point coordinates. This diagonalization problem is solved in 2D (i.e., $W_{2D}$ is a function of 4 variables) using complex numerical algorithms implemented in COMSYL. Fortunately, in 1D the CSD is a function of two variables, represented in a matrix that can be easily diagonalized using standard tools availables in standard mathematical libraries, such as python-numpy. The construction of $W(x_1,x_2)$ uses Kim's convolution theorem \cite{kim1986b} as described in \citeasnoun{glass2017}. It includes two ingredients: i) the statistical parameters of the electron beam at the undulator center (sizes and divergences), and ii) the intensity distribution of the undulator emission at the undulator center. The undulator emission is calculated in a plane far enough from the undulator using classical electrodynamics \cite{jackson} (as implemented in the pySRU python library \cite{pySRU}), and then backpropagated (using a Fresnel propagator) to the center of the undulator. 
 
-It is known that the emission of the undulator is not Gaussian. In spite of that, Gaussian approximation has been proposed \cite{coisson1997} and inadequately used for undulator radiation. In this case, Kim's convolution theorem predicts a CSD that is identical to that of the Gaussian Shell-model (GSM), whose CSD can be expanded analytically in coherent modes \cite{Starikov82}. The main arguments in favour of using numeric (non approximated) coherent modes are: i) there are differences in the mode shape, that are different than the Gaussian-Hermite modes in GSM, and ii) they produce different results after propagation (divergence). Indeed, the GSM predicts for the first coherent mode a phase space volume $\sigma \sigma'=\lambda/(4 \pi)$ whereas numeric fits for the undulator emission come out to about twice this value \cite{elleaume}. Moreover, the GSM modes have constant phase (they are real functions) whereas the undulator modes have non-constant phase (complex functions).
+It is known that the emission of the undulator is not Gaussian. In spite of that, Gaussian approximation has been proposed \cite{coisson1997}, and used inadequately for undulator radiation. In this case, Kim's convolution theorem predicts a CSD that is identical to that of the Gaussian Shell-model (GSM), whose CSD can be expanded analytically in coherent modes \cite{Starikov82}. The main arguments in favour of using numeric (non approximated) coherent modes are: i) there are differences in the mode shape, that are different than the Gaussian-Hermite modes in GSM, and ii) they produce different results after propagation (divergence). Indeed, the GSM predicts for the first coherent mode a phase space volume $\sigma \sigma'=\lambda/(4 \pi)$ whereas numeric fits for the undulator emission come out to about twice this value \cite{elleaume}. Moreover, the GSM modes have constant phase (they are real functions) whereas the undulator modes have non-constant phase (complex functions).
 
 The interest of the coherent mode decomposition method is twofold: the possibility to propagate a partial coherent beam along the beamline by just propagating a few modes (less modes for a more coherent beam) which behave like coherent wavefronts, and the use of the coherent fraction (a scalar parameter) as a well-defined measure of how coherent is the beam at any position of the beamline.
 
@@ -214,7 +215,7 @@ A,  & \mbox{~~if~~} x_{min} \le x \le x_{max}
 \end{equation}
 When the element is a slit, then $A=1$. If it is a beamstop, then $A=0$. In the following simulations we will use an aperture of finite length $a$ centered with the beam, therefore $x_{min}=-a/2$ and $x_{max}=a/2$.
 
-A sometimes useful case is the ``Gaussian slit" where $A=\exp(-x^2/(2\sigma_a))$. The aperture acts as a Gaussian apodization window. Although artificial, it is interesting to shape the beam with a Gaussian profile, which remains a Gaussian after propagation. Therefore, a Gaussian slit acting on a plane wavefront does not produce diffraction fringes.
+A useful case is the ``Gaussian slit" where $A=\exp(-x^2/(2\sigma_a))$. The aperture acts as a Gaussian apodization window. Although artificial, it is interesting to shape the beam with a Gaussian profile, which remains a Gaussian after propagation. Therefore, a Gaussian slit acting on a plane wavefront does not produce diffraction fringes.
 % Several recipes are proposed to relate $\sigma_a$ with the slit aperture $a=x_{max}-x_{min}$. We found convenient to 
 We define $\sigma_a=a/2.35$.
 
@@ -262,7 +263,7 @@ This section analyzes an idealized case of focusing a synchrotron beam with a tr
 When a coherent Gaussian beam is cropped by the slit aperture, the beam waist moves towards the lens. Closing the slit affects the focus position, that moves more and more to the lens position, which is reached at the limit of zero aperture. The change of the waist position happens when the Fresnel number\footnote{
 The factor 4 in the denominator comes from the choice of $a$ as the aperture size, thus $a/2$ is used for the radius.} is smaller than one
 \begin{equation}
-    N = \frac{a^2}{4 p \lambda}  < 1.
+    N_F = \frac{a^2}{4 p \lambda}  < 1.
 \end{equation}
 
 In the equations above $p$ is the distance from the aperture to the lens
@@ -271,42 +272,36 @@ After \citeasnoun{Belland:82}, there are three possible regimes
 \begin{enumerate}
 \item when diffraction effects are negligible, the
 characteristics of the Gaussian beam are unchanged
-behind the aperture ($N>1$),
+behind the aperture ($N_F>1$),
 \item when the Gaussian
-beam is weakly diffracted, it looks in the far-field always as a Gaussian beam, with slightly different characteristics ($N_0<N \le 1$),
-\item when the diffraction effects are large ($N<N_0$),
+beam is weakly diffracted, it looks in the far-field always as a Gaussian beam, with slightly different characteristics; this is valid for $N_F$ larger than a given $N_0$ and smaller than one,
+\item when the diffraction effects are large ($N_F<N_0$),
 the diffracted beam is no longer Gaussian.
 \end{enumerate}
 
 The transition (1) to (2) will move the focus towards the lens. The transition (2) to (3) depends on $N_0$, a value difficult to estimate analytically. A more general case happens when the numerical aperture is controlled by a slit placed at at distance $p_a$ upstream from the lens. 
-In this case, the Fresnel number can be generalized as $N=a^2 p / (4 \lambda (p-p_a)^2)$. The focus will shift to the position $q'=f p_a/(p_a-f)$, a position given by the geometrical optics when the source is placed at the slit position. 
+In this case, the Fresnel number can be generalized as $N_F=a^2 p / (4 \lambda (p-p_a)^2)$. The focus will shift to the position $q'=f p_a/(p_a-f)$, a position given by the geometrical optics when the source is placed at the slit position. 
 
 An optical system that focuses a partially coherent synchrotron beam in the horizontal plane is analyzed in detail by \citeasnoun{westfahl}. The focal system is in almost 1:1 magnification, and a shift of the focal position towards the mirror is produced when closing a slit placed just before the mirror. Analytical analyses using the Gaussian Shell-model and numerical partial coherent (multielectron) calculations with SRW \cite{codeSRW} agree in the obtained results. The analyses revealed a different shift for the two photon energies analyzed (3 and 9 keV). The good agreement between GSM and SRW is justified by a relatively low horizontal coherent fraction at the source (about 21\% at 3 keV and 12\% at 9 keV).
  
  
  \subsection{Changes in focal position and size as a function of the slit opening}
  
-Let us consider an aperture of dimension $a$ placed between the source and a lens, at a distance $p_a$ from the lens ($p_a < p$). The lens is set to focus the source into an image plane at $q$ downstream from the lens. Following the geometrical optics, the position of the focal plane is not changed if the aperture $a$ changes. The focal size is $Ms$  when the aperture size $a$ is larger than the source size $s$ ($M=q/p$ is the optical magnification). But if $a<s$ the aperture obscures part of the source like if it was an ``effective" smaller source. However, the position of the waist is not modified. When the beam has a high coherence, these results predicted by geometrical optics are not realistic. This section presents numerical simulations of the focused beam (changes in focal position and focal size) when considering the partial coherent undulator emission. 
-We then compute the beam evolution using wave optics. The insertion device source is a U18 undulator (period $\lambda_u$ of \SI{18}{\milli\meter}) with $N_u$ = 138 periods. The gap is tuned to have the first harmonic at $E$ = 7 keV (deflecting parameter $K$ = 1.851). 
+Let us consider an aperture of dimension $a$ placed between the source and a lens, at a distance $p_a$ from the lens ($p_a < p$). The lens is set to focus the source into an image plane at $q$ downstream from the lens. Following the geometrical optics, the position of the focal plane is not changed if the aperture $a$ changes. The focal size is $Ms$  when the aperture size $a$ is larger than the source size $s$ ($M=q/p$ is the optical magnification). But if $a<s$ the aperture obscures part of the source like if it was an ``effective" smaller source. However, the position of the waist is not modified. When the beam has a high coherence, these results predicted by geometrical optics are insufficient. This section presents numerical simulations of the focused beam (changes in focal position and focal size) when considering the partial coherent undulator emission. 
+We then compute the beam evolution using wave optics. The insertion device source is a U18 undulator (period $\lambda_u=$~\SI{18}{\milli\meter}) with $N_u$~=~138 periods. The gap is tuned to have the first harmonic at $E$~=7~keV (deflecting parameter $K$~=~1.851). 
 
-\subsubsection{Full coherence} We first suppose an ideal storage ring with zero emittance, therefore producing a fully coherent emission. A Be lens of radius $R$ = \SI{0.2}{\milli\meter} ($f=$~\SI{14.35}{\meter} at 7 keV) is placed $p=$ \SI{65}{\meter}, and a slit of variable aperture $a$ is placed at $p_a$ = \SI{29}{\meter} upstream from the lens. The beam at the slit plane has a full-width at half-maximum (FWHM) $a_{FWHM}=$ \SI{565}{\micro\meter}. The aperture is open at $a = n \times a_{FWHM}$ with different values of $n$ covering from fully opening to a very narrow aperture. The refracted beam is analyzed at different positions from the lens by calculating the FWHM of the intensity distribution. At the focal position the FWHM presents a minimum. 
+\subsubsection{Full coherence} We first suppose an ideal storage ring with zero emittance, therefore producing a fully coherent emission. A Be lens of radius $R=$~ \SI{0.2}{\milli\meter} ($f=$~\SI{14.35}{\meter} at 7 keV) is placed $p=$~\SI{65}{\meter}, and a slit of variable aperture $a$ is placed at $p_a=$~\SI{29}{\meter} upstream from the lens. The beam at the slit plane has a full-width at half-maximum (FWHM) $a_\text{FWHM}=$~\SI{565}{\micro\meter}. The aperture is open at $a=n \times a_\text{FWHM}$ with different values of $n$ covering from fully opening to a very narrow aperture. The refracted beam is analyzed at different positions from the lens by calculating the FWHM of the intensity distribution. At the focal position the FWHM presents a minimum. 
 
 \begin{figure}\label{fig:oneTFund}
-    \centering
-    % \includegraphics[width=0.95\textwidth]{figures/oneTFund_400um.eps}
-    % \includegraphics[width=0.95\textwidth]{figures/oneTFund_300um.png}  
-    \includegraphics[width=0.95\textwidth]{figures/oneTF_UndSource_RectSlit_R200um.eps}
-    %     \includegraphics[width=0.95\textwidth]{figures/oneTFundGSM_200um.eps}
-    % \includegraphics[width=0.95\textwidth]{figures/oneTFundHYBRID_200um.eps}
-    % \includegraphics[width=0.95\textwidth]{figures/oneTFund_100um.png}
-
-    \caption{Evolution of the size of a coherent undulator beam cropped by a slit and focused by a lens of $R$=~\SI{0.2}{\milli\meter} 
-    The plot shows the FWHM of the beam  as a function of the distance from the lens. The aperture is open at $a = n \times a_{FWHM}$ with different values of $n$ (shown in the legend) and $a_{FWHM}$ = \SI{565}{\micro\meter} (the beam FWHM at the aperture plane). The focal positions given by geometrical optics are represented for the source placed wither at the ID position (yellow vertical line) or at the slit position (blue vertical line).
-    The Fresnel number $N$ calculated at the slit plane is also marked in the legend.
-    }
+\centering
+\includegraphics[width=0.95\textwidth]{figures/oneTF_UndSource_RectSlit_R200um.eps}
+\caption{Evolution of the size of a coherent undulator beam cropped by a slit and focused by a lens of $R$=~\SI{0.2}{\milli\meter} 
+The plot shows the FWHM of the beam  as a function of the distance from the lens. The aperture is open at $a = n \times a_\text{FWHM}$ with different values of $n$ (shown in the legend) and $a_\text{FWHM}$ = \SI{565}{\micro\meter} (the beam FWHM at the aperture plane). The focal positions given by geometrical optics are represented for the source placed wither at the ID position (yellow vertical line) or at the slit position (blue vertical line).
+The Fresnel number $N_F$ calculated at the slit plane is also marked in the legend.
+}
 \end{figure}
 
-Fig.~\ref{fig:oneTFund} shows the evolution of the beam after being focused by the lens. With the open slit the geometrical optics give a focal position $q=$~\SI{18.4168}{\meter} (source at the ID position, distant $p$ from the lens) and $q_a=$~\SI{28.4089}{\meter} (source at slit position, distant $p_a$ from lens). It can be noticed that for $n\ge$~1 (Fresnel number $N\ge$~35) the situation does not change with respect the open slit because the cropping by the slit is negligible. For $n=0.5$ ($N=8.7$, brown line) the FWHM of the focal size increases and the depth of focus also increases, manifested in a flat depression. For smaller values of $n$ and $N$ the minimum shifts to higher distances (e.g., $n=0.1$ red line) and becomes less pronounced. For $n$ = 0.05 (green line), a small beam size is found again close to the $q_a$ position, but it presents a twin minimum due to the interference fringes found in the intensity distributions. Both minima converge to a the $q_a$ position for $n\le$~0.01 (orange line). 
+Fig.~\ref{fig:oneTFund} shows the evolution of the beam after being focused by the lens. With the open slit the geometrical optics give a focal position $q=$~\SI{18.4168}{\meter} (source at the ID position, distant $p$ from the lens) and $q_a=$~\SI{28.4089}{\meter} (source at slit position, distant $p_a$ from lens). It can be noticed that for $n\ge$~1 (Fresnel number $N_F\ge$~35) the situation does not change with respect the open slit because the cropping by the slit is negligible. For $n=0.5$ ($N_F=8.7$, brown line) the FWHM of the focal size increases and the depth of focus also increases, manifested in a flat depression. For smaller values of $n$ and $N_F$ the minimum shifts to higher distances (e.g., $n=0.1$ red line) and becomes less pronounced. For $n$ = 0.05 (green line), a small beam size is found again close to the $q_a$ position, but it presents a twin minimum due to the interference fringes found in the intensity distributions. Both minima converge to a the $q_a$ position for $n\le$~0.01 (orange line). 
 
 When the focal distance of the lens is reduced (using lenses with smaller radius, or piling several lenses), the $q$ and $q_a$ positions shift to shorter distances, and  $|q-q_a|$ also reduces. They converge to a single position: the lens focal length $q=q_a=f$. This happens when both source-lens and slit-lens distances can be considered at infinite. 
 
@@ -337,8 +332,7 @@ $\epsilon_y=~\SI{10}{\pico\meter \radian}$, and beta functions
 $\beta_x=~\SI{6.8}{\meter}$,
 $\beta_y=~\SI{2.8}{\meter}$
 }
-to perform a coherent mode decomposition of the undulator source.
-% This is required to include the partial coherent effects. 
+to perform the coherent mode decomposition of the undulator source.
 This is done for the horizontal and vertical directions, resulting coherent fractions (at 7 keV) of $CF_h=$13\% and $CF_v=$58\%, for the horizontal and vertical directions. These values are much higher than for the old ESRF-1 source, but still low to justify approximating the beam by a coherent beam. Therefore, we propagated a number of modes large enough to contain more than 99\% of the source intensity (36 modes in H and 8 in V). The illumination at the entrance slit plane is \SI{610}{\micro\meter} in H times \SI{566}{\micro\meter} in V. The slit aperture is used to tune the coherence of the beam: closing the slit increases the $CF$. In the limit (zero aperture) the beam after the slit is fully coherent ($CF=1$), but obviously with zero intensity. The choice of the right slit aperture comes from a compromise between coherence and flux. Figure~\ref{fig:cf_vs_aperture} shows the $CF$ after of the H and V 1D beams after the slit for different slit apertures. From this figure we select the apertures to be used in the following simulations. We selected a photon energy of \SI{7}{keV}. A first value of $CF_h=CF_v=$ 90\% in both horizontal and vertical (thus with a combined 2D  $CF=CF_h CF_v=$ 81\%) is obtained with slit apertures of
 $a_h$ =~\SI{40.3}{\micro\meter}, and 
 $a_v$ =~\SI{227}{\micro\meter} (horizontal and vertical, respectively). A second value of  $CF_h=CF_v=$ 70\% (thus 2D $CF$ of about 50\%), corresponds to 
@@ -382,7 +376,7 @@ We remarked that hybrid ray-tracing \cite{codeHYBRID} correctly reproduces the e
 
 %http://lpc1.clpccd.cc.ca.us/lpc/molander/PDFs/Twolenses.pdf
 
-We study here an optical system composed by two lenses (lens-1 with focal length $f_1$ and $f_2$ for lens-2) separated by a distance $D$. Following \citeasnoun{Goodman85}, the relationship between object-to-lens-1 distance $p_1$ and the lens-2-to-image distance $q_2$ is
+We study here an optical system composed by two lenses (lens-1 with focal length $f_1$ and lens-2 with $f_2$) separated by a distance $D$. Following \citeasnoun{Goodman85}, the relationship between object-to-lens-1 distance $p_1$ and the lens-2-to-image distance $q_2$ is
 \begin{equation}
 \label{eq:twolens}
     D-(f_1+f_2)=\frac{f_1^2}{p_1-f_1} + \frac{f_2^2}{q_2-f_2}.
@@ -437,7 +431,8 @@ For fixed distances $p_1$, $D$ and $q_2$, and also a given value of $f_1$, one c
 Fig.~\ref{fig:f1f2map} shows the trajectories of $f_2$ as a function of a variable $f_1$. 
 The choice of one pair $(f_1,f_2)$ from these curves guarantees that the focus is at the sample position ($L=p_1+D+q_2$~= \SI{200}{\meter} from source).
 
-Figure~\ref{fig:f1f2map} also shows the value of $f_2$ optimized numerically\footnote{Calculations in this section use a Gaussian slit aperture to minimize diffraction fringes}. They are calculated from the analysis of the wavefront phase impinging on lens 2. A correction profile to focus on the sample is calculated using the method described in section~\ref{sec:refractorCorrector}. This profile is fitted with a circle over the central part of the lens, thus giving the radius of curvature or the most adequate lens, and also the its focal length. 
+Figure~\ref{fig:f1f2map} also shows the value of $f_2$ optimized numerically\footnote{Calculations in this section use a Gaussian slit aperture to minimize diffraction fringes}. 
+They are calculated from the analysis of the wavefront phase impinging on lens 2. A correction profile to focus on the sample is calculated using the method described in section~\ref{sec:refractorCorrector}. This profile is fitted with a circle over the central part of the lens, thus giving the radius of curvature or the most adequate lens, and also the its focal length. 
 The $(f_1,f_2)$ curves depend strongly on the slit aperture in the horizontal, because of the low $CF_h$ of the source (12\%) is highly increased by the slit. In the vertical the source is more coherent ($CF_v$~=~58\%) therefore the slit improves the $CF_v$  and there is not much change in the trajectories up to values of 90\%. However, in the case of a slit with $a_v$~=~\SI{25}{\micro\meter} that is acting as a pinhole the trajectories (red line) approach the results of the geometrical optics considering the source at the slit position.
 
 \begin{figure}
@@ -505,7 +500,6 @@ In this section we analyse particular beamline focusing configurations using sev
     \label{table:comparison}
     \caption{Comparison of sizes (FWHM, in \SI{}{\micro\meter}) calculated with different methods for the cases defined in Table~\ref{table:2Dusercases}.
     In brackets, the values for the fully coherent beam (single electron with SRW, first coherent mode with COMSYL/WOFRY), and zero emittance with Hybrid).
-    \todo{REMOVE numbers \inblue{in blue}: sizes from Fig.~\ref{fig:2DWofry1D} and coherent fraction [\%] at focal point}
     }
     \centering
     \begin{tabular}{p{0.05\textwidth}|c|c|c|c|c}
@@ -515,17 +509,28 @@ In this section we analyse particular beamline focusing configurations using sev
          SRW&
          Hybrid \\
          \hline
-1 h  & \inblue{8.6,}8.5(8.1) \inblue{[94]}  & 10.0 (9.9)  & 8.6 (7.5)   & 17.3 (17.5) \\
-1 v  & \inblue{5.3,}4.8(4.8) \inblue{[97]}   & 4.7 (5.1)   & 4.6 (4.6)   & 3.3 (3.1) \\
+1 h  & 8.5(8.1)    & 10.0 (9.9)  & 8.6 (7.5)   & 17.3 (17.5) \\
+1 v  & 4.8(4.8)    & 4.7 (5.1)   & 4.6 (4.6)   & 3.3 (3.1) \\
 \hline
-2 h  & \inblue{42.0,}39.9(38.2) \inblue{[94]} & 39.5 (39.5) & 40.0 (36.1)  & 39.9 (37.5) \\
-2 v  & \inblue{32.3,}32.4(29.6) \inblue{[90]} & 30.6 (29.3) & 34.4 (29.6)  & 74.0 (75.3) \\
+2 h  & 39.9(38.2)  & 39.5 (39.5) & 40.0 (36.1)  & 39.9 (37.5) \\
+2 v  & 32.4(29.6)  & 30.6 (29.3) & 34.4 (29.6)  & 74.0 (75.3) \\
 \hline
-3 h  & \inblue{35.6,}37.5(29.0) \inblue{[77]} & 36.6 (28.1) & 40.3 (28.4)  & 43.3 (33.0) \\
-3 v  & \inblue{5.3,}6.1 (4.9)  \inblue{[77]} & 6.4 (5.7) & 6.3 (4.6)   & 6.5 (5.8) \\
+3 h  & 37.5(29.0)  & 36.6 (28.1) & 40.3 (28.4)  & 43.3 (33.0) \\
+3 v  & 6.1 (4.9)   & 6.4 (5.7)   & 6.3 (4.6)    & 6.5 (5.8) \\
 \hline
-4 h  & \inblue{24.0,}24.6(19.1)\inblue{[77]}  & 26.1 (18.6) & 27.4 (18.0)  & 27.1 (18.8) \\
-4 v  & \inblue{134.4,}133.7(110.3)\inblue{[71]}& 111.7 (90.4) & 137.4 (132.0) & 150.2 (159.8) \\
+4 h  & 24.6(19.1)  & 26.1 (18.6)  & 27.4 (18.0)   & 27.1 (18.8) \\
+4 v  & 133.7(110.3)& 111.7 (90.4) & 137.4 (132.0) & 150.2 (159.8) \
+% 1 h  & \inblue{8.6,}8.5(8.1) \inblue{[94]}  & 10.0 (9.9)  & 8.6 (7.5)   & 17.3 (17.5) \\
+% 1 v  & \inblue{5.3,}4.8(4.8) \inblue{[97]}   & 4.7 (5.1)   & 4.6 (4.6)   & 3.3 (3.1) \\
+% \hline
+% 2 h  & \inblue{42.0,}39.9(38.2) \inblue{[94]} & 39.5 (39.5) & 40.0 (36.1)  & 39.9 (37.5) \\
+% 2 v  & \inblue{32.3,}32.4(29.6) \inblue{[90]} & 30.6 (29.3) & 34.4 (29.6)  & 74.0 (75.3) \\
+% \hline
+% 3 h  & \inblue{35.6,}37.5(29.0) \inblue{[77]} & 36.6 (28.1) & 40.3 (28.4)  & 43.3 (33.0) \\
+% 3 v  & \inblue{5.3,}6.1 (4.9)  \inblue{[77]} & 6.4 (5.7) & 6.3 (4.6)   & 6.5 (5.8) \\
+% \hline
+% 4 h  & \inblue{24.0,}24.6(19.1)\inblue{[77]}  & 26.1 (18.6) & 27.4 (18.0)  & 27.1 (18.8) \\
+% 4 v  & \inblue{134.4,}133.7(110.3)\inblue{[71]}& 111.7 (90.4) & 137.4 (132.0) & 150.2 (159.8) \\
     \end{tabular}
 \end{table}
 
@@ -559,54 +564,28 @@ We analysed the four cases defined in Table~\ref{table:2Dusercases} with hybrid 
 \newpage
 
 \begin{figure}\label{fig:2DWofry1D}
-    \centering
-    case 1~~~~~~~~~~~~~~~~~~~~~~~~~~~~~case 2\\
-    \includegraphics[width=0.4\textwidth]{figures/case1_wofry_ws_results.png}
-    \includegraphics[width=0.4\textwidth]{figures/case2_wofry_ws_results.png}\\
-    case 3~~~~~~~~~~~~~~~~~~~~~~~~~~~~~case 4\\
-    \includegraphics[width=0.4\textwidth]{figures/case3_wofry_ws_results.png}
-    \includegraphics[width=0.4\textwidth]{figures/case4_wofry_ws_results.png}
+    \includegraphics[width=0.99\textwidth]{figures/fig_wofry.pdf}
     \caption{2D intensity distribution at the focal plane. It has been constructed from the Wofry1D calculations.
     \todo{Group all these four figures in a single one}
     }
 \end{figure}
 
 \begin{figure}\label{fig:comsyl}
-    \centering
-    case 1~~~~~~~~~~~~~~~~~~~~~~~~~~~~~case 2\\
-    \includegraphics[width=0.4\textwidth]{figures/case1_comsyl.png}
-    \includegraphics[width=0.4\textwidth]{figures/case2_comsyl.png}\\
-    case 3~~~~~~~~~~~~~~~~~~~~~~~~~~~~~case 4\\
-    \includegraphics[width=0.4\textwidth]{figures/case3_comsyl.png}
-    \includegraphics[width=0.4\textwidth]{figures/case4_comsyl.png}
+    \includegraphics[width=0.99\textwidth]{figures/fig_comsyl.pdf}
     \caption{COMSYL calculations of the intensity distribution at the focal plane for the cases listed in Table~\ref{table:2Dusercases}.
     }
 \end{figure}
 
-% \vspace{4cm}
-
 \begin{figure}\label{fig:srw}
-    \centering
-    case 1~~~~~~~~~~~~~~~~~~~~~~~~~~~~~case 2\\
-    \includegraphics[width=0.4\textwidth]{figures/case1_srw.png}
-    \includegraphics[width=0.4\textwidth]{figures/case2_srw.png}\\
-    case 3~~~~~~~~~~~~~~~~~~~~~~~~~~~~~case 4\\
-    \includegraphics[width=0.4\textwidth]{figures/case3_srw.png}
-    \includegraphics[width=0.4\textwidth]{figures/case4_srw.png}
+    \includegraphics[width=0.99\textwidth]{figures/fig_srw.pdf}
     \caption{Multi-electron SRW calculations of the intensity distribution at the focal plane for the cases listed in Table~\ref{table:2Dusercases}.}
 \end{figure}
 
-\vspace{4cm}
+\vspace{1cm}
 
 \begin{figure}
     \label{fig:hybrid}
-    \centering
-    case 1~~~~~~~~~~~~~~~~~~~~~~~~~~~~~case 2\\
-    \includegraphics[width=0.4\textwidth]{figures/case1_hybrid.png}
-    \includegraphics[width=0.4\textwidth]{figures/case2_hybrid.png}\\
-    case 3~~~~~~~~~~~~~~~~~~~~~~~~~~~~~case 4\\
-    \includegraphics[width=0.4\textwidth]{figures/case3_hybrid.png}
-    \includegraphics[width=0.4\textwidth]{figures/case4_hybrid.png}
+    \includegraphics[width=0.99\textwidth]{figures/fig_hybrid.pdf}
     \caption{Hybrid ray tracing calculations of the intensity distribution at the focal plane for the cases listed in Table~\ref{table:2Dusercases}.}
 \end{figure}
 
@@ -618,10 +597,10 @@ We analysed the four cases defined in Table~\ref{table:2Dusercases} with hybrid 
 \label{sec:discussion}
 
 
-\subsection{f1 f2 trajectories and focal sizes} 
+\subsection{$f_1$ $f_2$ trajectories and focal sizes} 
 
 The focusing of the partial coherence x-ray beams produced by low emittance storage rings is a complex phenomenon, because diffraction effects induced by coherence modify significantly the  beam characteristics. The concepts of geometrical optics often used to calculate the focal position (lens equation) and the focal size (using magnification) fail when the x-ray beam is cropped significantly (reduced NA) (see Figs.~\ref{fig:f1f2map}, \ref{fig:focalSizes}).
-The system studied here, based on the project for the new ID18 beamline at EBS-ESRF, will image directly the source to the focal plane (sample), using two focusing elements (paired transfocators). This is an innovative concept only possible thanks to the high coherence that the new storage rings provide. Beamlines in old synchrotrons always imaged the source into a secondary source at least in horizontal. The use of a secondary is advantageous in terms of controlling the size with a slit and therefore the coherence, but the drastic reduction in distance source-sample reduces the benefits of the long beamlines. Also, bringing the source closer to the sample imply a larger beam divergence that affects negatively to the transmittivity. Transmittivity depends on the optical element acceptance, usually limited by the extremely good surface finish required. Indeed, in most nonofocusing beamlines (e.g. the ID16A beamline at ESRF \cite{ID16A, hierarchical}) the focal size is mainly defined by  the aperture which also limits the transmittivity to values close to the coherent fraction. At the ID18 beamline at the EBS-ESRF source, the goal is obtain a variable beam size, but keeping flux as high as possible. It is therefore driven by the requirements on coherence controlled by the slit. Imaging the source directly on the sample is much affected by the NA and beam coherence, as our results show. Note also that the ID18 will be able to work in other configurations not analyzed here, giving higher demagnification (with the transfocator 2 closer to the sample). It will also be possible to use a secondary source, the image of transfocator 1, placed close before transfocator 2.
+The system studied here, based on the project for the new ID18 beamline at EBS-ESRF, will image directly the source to the focal plane (sample), using two focusing elements (paired transfocators). This is an innovative concept only possible thanks to the high coherence that the new storage rings provide. Beamlines in old synchrotrons always imaged the source into a secondary source at least in horizontal. The use of a secondary source is advantageous in terms of controlling the size with a slit and therefore the coherence, but the drastic reduction in distance source-sample reduces the benefits of the long beamlines. Also, bringing the source closer to the sample imply a larger beam divergence that affects negatively to the transmittivity. Transmittivity depends on the optical element acceptance, usually limited by the extremely good surface finish required. Indeed, in most nonofocusing beamlines (e.g. the ID16A beamline at ESRF \cite{ID16A, hierarchical}) the focal size is mainly defined by  the aperture which also limits the transmittivity to values close to the coherent fraction. At the ID18 beamline at the EBS-ESRF source, the goal is obtain a variable beam size, but keeping flux as high as possible. It is therefore driven by the requirements on coherence controlled by the slit. Imaging the source directly on the sample is much affected by the NA and beam coherence, as our results show. Note also that the ID18 will be able to work in other configurations not analyzed here, giving higher demagnification (with the transfocator 2 closer to the sample). It will also be possible to use a secondary source, the image of transfocator 1, placed close before transfocator 2.
 
 For the EBS-ESRF, the horizontal coherent fraction is lower than the vertical one (Fig.~\ref{fig:cf_vs_aperture}). This implies the necessity of cropping the beam more horizontally than vertically to get $CF_h=CF_v$, thus the smaller NA induces more distortions in the beam. In the vertical direction, the beam must be less cropped, causing smaller beam distortion than in horizontal direction. The horizontal apertures used to obtain typical values of CF suitable for experiments (50-95 \%) do strongly affect the evolution of the beam, but are not small enough to consider the slit as a secondary source. This is manifested in the shift and degradation of the focus that the first transfocator creates (Fig.~\ref{fig:oneTFund}): whereas in vertical most of the typical apertures (down to \SI{227}{\micro\meter}) induce the optical system to image the source (at the ID center), in horizontal the slit aperture required to obtain $CF_h=$ 90\% provokes a "shifting" of the source from its real position (ID center) to the slit position. Although this shift of the focal position has been predicted and calculated before (see \citeasnoun{Tanaka:85} for Gaussian beams, or \citeasnoun{westfahl} for synchrotron beams) our calculations in Fig. 3 reveal two new facts: i) the shift exists but it is directed upstream to the position defined by the geometrical optics for the slit image (and not downstream to the lens position, as found for the systems analyzed in the references mentioned), and ii) the focal size is highly degraded (its size increases) when the beam focus is found in between the two positions defined by the geometrical optics.  
 
@@ -664,11 +643,11 @@ We remark that these thee cases have in common that the $f_1$ value in use is cl
     \label{fig:focalSizes_hybrid}
 \end{figure}
 
-\subsection{Further simulations}
+% \subsection{Further simulations}
 
-The simulations presented here are motivated by the ID18 project but the optical layout has been simplified to the minimum necessary to study the effect of pairing two transfocators. A more complete study including the other optical elements, other transfocator configurations will be presented elsewhere, also for different energies and implementing the effect of surface errors due to thermal load and surface finish. It is however interesting to briefly mention here some results of this study to give a more complete vision of other relevant parameters to consider.
+% The simulations presented here are motivated by the ID18 project but the optical layout has been simplified to the minimum necessary to study the effect of pairing two transfocators. A more complete study including the other optical elements, other transfocator configurations will be presented elsewhere, also for different energies and implementing the effect of surface errors due to thermal load and surface finish. It is however interesting to briefly mention here some results of this study to give a more complete vision of other relevant parameters to consider.
 
-\subsubsection{Transmitted flux.} We have limited our study to the focal sizes, but it can be complemented with focal flux. At \SI{7}{keV}, the undulator in the configuration selected emits a flux of 1.5 10$^{15}$ photons/s/0.1\%bw. Each of the three elements studied (slit, lens -1 and lens-2) absorb part of the flux. The estimation of the absorption by the slit can be done using simple geometrical arguments, and the absorption by the slits depend on the average Be thickness presented to the beam. The linear attenuation coefficient of Be at 7 keV is $\mu=$~\SI{3}{\centi\meter$^{-1}$}, giving 1.45\% attenuation for a \SI{50}{\micro\meter} thick layer (like lens thickness used in simulations\footnote{In the simulations the horizontal and vertical focusing are separated in two lenses, with accumulated thickness \SI{100}{\micro\meter} thus absorption 3\%}). For the case 1 simulations we extracted the absorption for the different absorbing elements (slit, lens-1 and lens-2) in the case of partial coherence and also for full coherence (see Table~\ref{table:absorption}).
+\subsection{Transmitted flux.} We have limited our study to the focal sizes, but it can be complemented with focal flux. At \SI{7}{keV}, the undulator in the configuration selected emits a flux of 1.5 10$^{15}$ photons/s/0.1\%bw. Each of the three elements studied (slit, lens -1 and lens-2) absorb part of the flux. The estimation of the absorption by the slit can be done using simple geometrical arguments, and the absorption by the slits depend on the average Be thickness presented to the beam. The linear attenuation coefficient of Be at 7 keV is $\mu=$~\SI{3}{\centi\meter$^{-1}$}, giving 1.45\% attenuation for a \SI{50}{\micro\meter} thick layer (like lens thickness used in simulations\footnote{In the simulations the horizontal and vertical focusing are separated in two lenses, with accumulated thickness \SI{100}{\micro\meter} thus absorption 3\%}). For the case 1 simulations we extracted the absorption for the different absorbing elements (slit, lens-1 and lens-2) in the case of partial coherence and also for full coherence (see Table~\ref{table:absorption}).
 
 There is excellent agreement for partial coherence. For full coherence, the Wofry1D results are different than the SRW+Hybrid, because the geometry of the 1st coherent mode used to represent the full coherent beam is not the same as the geometry of the filament beam (used in SRW and Hybrid). We note a high absorption in lens-2, due to the fact that in this case the lens-2 is overilluminated, therefore the \SI{1}{\milli\meter} physical aperture absorbs considerably the beam.
 
@@ -758,7 +737,7 @@ case & \multicolumn{3}{c|}{slit} & \multicolumn{3}{c|}{lens-1} & \multicolumn{3}
 %     \end{tabular}
 % \end{table}
 
-\subsubsection{Accuracy of the focal position and depth of focus}
+\subsection{Accuracy of the focal position and depth of focus}
 \label{sec:caustic}
 
 We have calculated the beam evolution in the neighbourhood of the sample position for the four cases studied (see Fig.~\ref{fig:caustic}). From these plots one can obtain the position of the best focus and the depth of focus.
@@ -767,8 +746,10 @@ It can be observed sometimes a mismatch between the position of the best focus a
 
 For pairing two transfocators, the algorithm chosen to calculate the $f_2$ value consist in analyzing the wavefront at the lens-2 position, find a corrector refractive object that would transform the incoming wavefront in a cylindrically convergent wavefront (see section \ref{sec:refractorCorrector}), and fit the radius at the center. We then get the $R_2$ and therefore the $f_2$ value. In addition, to obtain smooth $(f_1,f_2)$ curves in Fig.~\ref{fig:f1f2map} we have used a Gaussian slit (see section \ref{sec:gaussianslit}). This smears out the diffraction fringes, because in an ideallized system where a point source is focused at the sample position, the recorded intensity would correspond to the diffraction pattern of the slit, that can be considered as an "object" placed in the beam (see e.g. \cite{paganin_book}). The use of a Gaussian object implies that its diffraction pattern is a Gaussian with no diffraction fringes. 
 
-For some cases (1h, 1v, 3h) in Fig.~\ref{fig:caustic} there is a quite good agreement between the focal position obtained from the maximum of intensity on-axis (plotted at the top of the image) and our expected position (the zero in the plots). In some other cases (2v, 3h, 4h) the agreement is acceptable, taking into account that the depth of focus can be quite large (of the order of meters). A small correction in $f_2$ would bring the best focus to its ideal position. This correction is necessary because we used a Gaussian slit for calculating the $(f_1,f_2)$ curves and we neglected some oscillations around the curves shown that appear if no Gaussian apodizzation were done. Unfortunately, there are two pathological cases where the algorithm used to calculate $f_2$ did not succeed: the cases 2h and 4v.
+For some cases (1h, 1v, 3h) in Fig.~\ref{fig:caustic} there is a quite good agreement between the focal position obtained from the maximum of intensity on-axis (plotted at the top of the image) and our expected position (the zero in the plots). In some other cases (2v, 3h, 4h) the agreement is acceptable, taking into account that the depth of focus can be quite large (of the order of meters). A small correction in $f_2$ would bring the best focus to its ideal position. This correction is necessary because we used a Gaussian slit for calculating the $(f_1,f_2)$ curves and we neglected some oscillations around the curves shown that appear if no Gaussian apodization were done. There are two pathological cases where the algorithm used to calculate $f_2$ did not succeed: the cases 2h and 4v.
 The $f_2$ error in 2h is also due to the oscillations in the $(f_1,f_2)$ and can be corrected, as shown in Fig.~\ref{fig:causticcorrection}. However, case 4v cannot be corrected because we would need a divergent lens to bring the focus of $f_1$ to the sample position \todo{check}. Setting $R_2=f_2=\infty$ would reduce the beam size at the sample position, but cannot get the best focus there. However, an ad-hoc defined refractive corrector in the place of lens-2 would do the job.  
+
+The depth of focus change from XX to XX...
 
 
 
@@ -799,21 +780,18 @@ The $f_2$ error in 2h is also due to the oscillations in the $(f_1,f_2)$ and can
 \begin{figure}\label{fig:causticcorrection}
 \centering
 
-
-\includegraphics[width=0.49\textwidth]{figures/case2h_caustic.png}
-\includegraphics[width=0.49\textwidth]{figures/case4v_caustic.png}
 \includegraphics[width=0.49\textwidth]{figures/case2hRefined_caustic.png}
 \includegraphics[width=0.49\textwidth]{figures/case4vRefined_caustic.png}
 \includegraphics[width=0.49\textwidth]{figures/case2hCorrector_caustic.png}
 \includegraphics[width=0.49\textwidth]{figures/case4vCorrector_caustic.png}
 
-\caption{Evolution of the beam size in the around the sample position for the ``pathological" case 2h and 2v (listed in Table~\ref{table:2Dusercases}). Top row: uncorrected profiles (as in Fig.~\ref{fig:caustic}), central row: with corrected lens $R_2$=\SI{410}{\micro\meter} ($f_2=$\SI{29.4}{\meter}) for case 2h and $R_2=f_2=\infty$ for case 4v, botton row: using a free-form refractive corrector instead of lens-2.
+\caption{Evolution of the beam size in the around the sample position for the ``pathological" case 2h and 4v shown in Fig.~\ref{fig:caustic}. Top row: using corrected lens-2 with $R_2$=\SI{410}{\micro\meter} ($f_2=$\SI{29.4}{\meter}) for case 2h and $R_2=f_2=\infty$ for case 4v. Bottom: using a free-form refractive corrector instead of lens-2.
 }
 \end{figure}
 
 
 
-\subsubsection{Errors in optical surfaces}
+\subsection{Errors in optical surfaces}
 
 The performance of X-ray optics in the new generation synchrotron beamlines is limited by the quality of the optical surfaces \cite{lengeler1999,Yabashi}. Slope and height errors are often associated with surface finishing (higher spatial frequency), while figure errors are often associated with lower frequency deviations from ideal profile (e.g. bending, gravity sag, thermal deformations) \cite{srio1992, signorato1997}. Figure errors in x-ray lenses can be measured by different techniques (eg. grating interferometry, x-ray speckle tracking or ptychography) and readily included in the simulations \cite{celestre2020}. Some profiles measured at ESRF using x-ray speckle tracking \cite{berujon2020} with height error RMS of the order of \SI{1}{\micro\meter} are used to verify that the focal spot produced by lenses with realistic errors is not degraded with respect to the ideal lens surface. 
 
@@ -829,19 +807,19 @@ The performance of X-ray optics in the new generation synchrotron beamlines is l
 
 % The deformation profile calculated by FEA \todo{I USED FILE: SRC\_Si\_3.0mrad\_08000eV\_mo\_Si111\_Size1\_nodalOut.out} is is loaded in a ``mirror-like" element in Wofry, as described \cite{srioLBL}. For case 1, a small degradation in the horizontal direction is found (passing from \SI{8.09}{\micro\meter} to \SI{10.21}{\micro\meter} for the first coherent mode). It is accompanied by a loss of symmetry. A large deformation in the vertical spot is observed, but a spot close to the ideal is found when a best circle is subtracted from the profile. It is then possible to correct this added curvature. Indeed, by adjusting $f_2$ \todo{I will calculate this} it is possible to compensate the effects introduced by the crystal bending due to heat load.
 
-\subsubsection{Selection of the transfocator configuration.} 
+\subsection{Selection of the transfocator configuration.} 
 The results presented in this paper idealizes the transfocator with two orthogonal single lenses, each one focusing one direction (horizontal of vertical), with parabolic profiles and apex radii adjusted for the wanted focal length (via the usual $f=R/(2 N \delta$). The real transfocator will use a combination of one or several lenses to give a similar radius of curvature  ($R^{-1} = R_1^{-1} + R_2^{-1} + ...$). Two independent transfocators can be used for focusing independently the horizontal and vertical planes. Also, combination of 2D lenses matching the higher radius could be combined with 1D lenses to correct the radius of the direction that requires a shorter focal distance. The combinations of the lenses in the transfocator will not match perfectly the exact focal distances, thus producing a focal position close to the exact focal position at sample location. Depending on the used lenses, a different absorption is due to the accumulated thickness of the individual lenses. For example, the lens radii for case 4 can be obtained in using 2D lenses adjusted to focus in vertical (three lenses with $R_1=$~\SI{5}{\milli\meter}, $R_2=$~\SI{2}{\milli\meter} and $R_3=$~\SI{1}{\milli\meter} to get $R=$~\SI{0.588}{\milli\meter}) then adding two more 1D lenses to adjust the horizontal ($R_1=$~\SI{5}{\milli\meter} and $R_1=$~\SI{1}{\milli\meter} to get $R=$~\SI{0.345}{\milli\meter}, values very close to the exact values from Table~\ref{table:2Dusercases}. We simulated this configuration and got similar profiles than the case studied previously, with small differences in FWHM (10\% or less) and obviously more absorption. The empty space in between the lenses is neglected, which is a good approximation unless effects of ``adiabatic" focusing are expected, which may be the case for sub-micron focii.    
 
-\subsubsection{Off-resonance.} The simulations considered here where done for monochromatic radiation supposing the undulator tuned at the exact resonance (\SI{7}{keV}). This photon energy may not exactly correspond to the maximum of the emitted flux. Somme effects of out-resonance may appear when i) a ``pink" or not strictly monochromatic beam is used (in beamlines without monochromator or also using a high-band monochomator, as for example using multilayer), or ii) the undulator gap tuned by selecting the maximum of the intensity in a given aperture, thus corresponding to an energy value a bit lower (red-shifted) than exact resonance. The separation from the position of the maximum of intensity to the resonant energy increases when increasing the observation slit. In our case, this beamline will use a slit small enough to gain coherence, which implies that the maximum of the intensity is well approximated by the resonance energy, and it will use a crystal monochromator thus the beam can be considered as monochromatic, thus off-resonance effects are not appreciated. This has been checked numerically by averaging the intensity distribution at the sample position when scanning the photon energy around the resonance value ($7\pm0.1$~keV).   \todo{suppress this paragraph?}
+\subsection{Off-resonance.} The simulations considered here where done for monochromatic radiation supposing the undulator tuned at the exact resonance (\SI{7}{keV}). This photon energy may not exactly correspond to the maximum of the emitted flux. Somme effects of out-resonance may appear when i) a ``pink" or not strictly monochromatic beam is used (in beamlines without monochromator or also using a high-band monochomator, as for example using multilayer), or ii) the undulator gap tuned by selecting the maximum of the intensity in a given aperture, thus corresponding to an energy value a bit lower (red-shifted) than exact resonance. The separation from the position of the maximum of intensity to the resonant energy increases when increasing the observation slit. In our case, this beamline will use a slit small enough to gain coherence, which implies that the maximum of the intensity is well approximated by the resonance energy, and it will use a crystal monochromator thus the beam can be considered as monochromatic, thus off-resonance effects are not appreciated. This has been checked numerically by averaging the intensity distribution at the sample position when scanning the photon energy around the resonance value ($7\pm0.1$~keV).   \todo{suppress this paragraph?}
 
 
-\subsubsection{The measurement of coherence.} We measured the beam coherence using the coherent fraction $CF$, an idea introduced by \citeasnoun{glass2017}. This parameter has a strict definition in the context of the CMD: $CF$ is the occupation of the first coherent mode ($\eta_0$ in Eq.~\ref{eq:occupation}). We verified that this strict definition give values close to the approximated CF  calculated as the phase space dimension ratio between the coherent undulator emission (zero emittance) over the convolution of the electron beam phase space and the undulator emission. The CMD gives also the possibility of propagating the modes and also recalculate the $CF$ after the slits and optical elements. The coherence slit selects the wanted coherence (90\% for cases 1 and 2; or 70\% for cases 3 and 4 in our study) but the absorption of the lenses can also increase a bit more the coherence at the sample: $CF_h=$~94, 94, 77, 77 $CF_v=$~97, 90, 77, 71 for cases 1, 2, 3 and 4, respectively. 
+\subsection{The measurement of coherence.} We measured the beam coherence using the coherent fraction $CF$, an idea introduced by \citeasnoun{glass2017}. This parameter has a strict definition in the context of the CMD: $CF$ is the occupation of the first coherent mode ($\eta_0$ in Eq.~\ref{eq:occupation}). We verified that this strict definition give values close to the approximated CF  calculated as the phase space dimension ratio between the coherent undulator emission (zero emittance) over the convolution of the electron beam phase space and the undulator emission. The CMD gives also the possibility of propagating the modes and also recalculate the $CF$ after the slits and optical elements. The coherence slit selects the wanted coherence (90\% for cases 1 and 2; or 70\% for cases 3 and 4 in our study) but the absorption of the lenses can also increase a bit more the coherence at the sample: $CF_h=$~94, 94, 77, 77 $CF_v=$~97, 90, 77, 71 for cases 1, 2, 3 and 4, respectively. 
 
 Other common parameters to define the coherence are the degree of coherence and coherence length. The degree of (transversal) coherence is not a scalar but a function (see equation~\ref{eq:DTC}. The coherence length has not a strict definition and it is usually given as the ``width" of some cut of the coherence degree. We found more intuitive and practical to use the $CF$ as a measure of the coherence. However, a good idea of the coherence length at a given position along the beamline is also given by the FWHM of the first coherence mode (given in brackets in Table~\ref{table:comparison} for the four cases studied).    
 
 
 % finding focus https://www.optikos.com/finding-focus/
-\subsubsection{Practical considerations} Simulations like those presented here could be very beneficial for beamline operation, for its optimization and quick setting.  Complicated  relationships exist between the beam parameters requested by users (beam size and coherent fraction) and the beamline configuration (undulator, slit and transfocator setting). Quick simulations as done by Wofry1D could be a helpful instrument for the beamline staff to get the desired configurations. The plots shown here (e.g., $CF$ vs slit size in Fig.~\ref{fig:cf_vs_aperture}, trajectories in Fig.~\ref{fig:f1f2map}, or final size in Fig.~\ref{fig:focalSizes} could be simulated on-line and compared with results presented as look-up tables with similar aspect. We are also considering the design of a digital twin that mimics the real transfocator systems to assist beamline setting. For that, the fast simulation using the CMD method developed in Wofry1D will be an integrated component.  
+\subsection{Practical considerations} Simulations like those presented here could be very beneficial for beamline operation, for its optimization and quick setting.  Complicated  relationships exist between the beam parameters requested by users (beam size and coherent fraction) and the beamline configuration (undulator, slit and transfocator setting). Quick simulations as done by Wofry1D could be a helpful instrument for the beamline staff to get the desired configurations. The plots shown here (e.g., $CF$ vs slit size in Fig.~\ref{fig:cf_vs_aperture}, trajectories in Fig.~\ref{fig:f1f2map}, or final size in Fig.~\ref{fig:focalSizes} could be simulated on-line and compared with results presented as look-up tables with similar aspect. We are also considering the design of a digital twin that mimics the real transfocator systems to assist beamline setting. For that, the fast simulation using the CMD method developed in Wofry1D will be an integrated component.  
 
 Some practical consequences can be directly deduced from the results shown here. For example, looking at Fig.~\ref{fig:focalSizes} one can observe that the same focal size can be obtained with different configurations. To get a similar size, it is better to prefer a large $f_1$ to avoid over-illuminating the lens-2 and increase transmission of lens-1. The transfocator design is simplified if we restrict the horizontal focal distance t to be smaller than the vertical $f_h>f_v$. Here, $f_v$ can be obtained with lenses focusing in 2D and $f_h$ by adding 1D lenses focusing in the horizontal plane. 
 
