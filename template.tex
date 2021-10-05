@@ -14,12 +14,33 @@
 \usepackage{mathtools}
 \usepackage[normalem]{ulem}
 
+% rotation table labels...
+% see https://tex.stackexchange.com/questions/98388/how-to-make-table-with-rotated-table-headers-in-latex
+\usepackage{adjustbox}
+\usepackage{array}
+\usepackage{booktabs}
+\usepackage{multirow}
+
+%
+%
+
+
+
 
 \newcommand{\todo}[1]{{\color{red}[TODO: "#1'']}}
 \newcommand{\inblue}[1]{{\color{blue}#1}}
 \newcommand{\inred}[1]{{\color{red}#1}}
 \newcommand{\ingreen}[1]{{\color{green}#1}}
 \newcommand{\soutred}[1]{{\color{red}\sout{#1}}}
+
+\newcolumntype{R}[2]{%
+    >{\adjustbox{angle=#1,lap=\width-(#2)}\bgroup}%
+    l%
+    <{\egroup}%
+}
+\newcommand*\rot{\multicolumn{1}{R{90}{1em}}
+%
+}% no optional argument here, please!
 
 
      %-------------------------------------------------------------------------
@@ -409,7 +430,6 @@ The two transfocators in use are idealized as two real beryllium lenses of varia
 
     \caption{Trajectories $(f_1,f_2)$ for $D$~= \SI{105}{\meter} calculated numerically for different values of apertures. Panel a) is for the horizontal direction and panel b) for the vertical. 
     Analytical values displayed are obtained using equation~(\ref{eq:twolens}) with $p_1$~= \SI{65}{\meter} (object at source position) (solid lines) or $p_1$~= \SI{29}{\meter} (object at slit position) (dashed lines).
-    \todo{add CF\_h,v values to slit openings in legend}
     }
 \end{figure}
 
@@ -430,8 +450,6 @@ The $(f_1,f_2)$ curves depend strongly on the slit aperture in the horizontal, b
         
     \caption{Focal sizes obtained by a two transfocator system as a function of focal length of lens-1 $f_1$. The focal length $f_2$ of the second lens is obtained from the trajectories in Fig.~\ref{fig:f1f2map}. 
     Analytical values are obtained using equation~(\ref{eq:magnification}) with $p_1$~= \SI{65}{\meter} (object at source position) (solid lines) or $p_1$~= \SI{29}{\meter} (object at slit position) (dashed lines). 
-    \todo{add CF\_h,v values to slit openings in legend}
-    % Numerical values \ingreen{green} are obtained for the slit (upstream lens 1) either open or closed to $a$~= \SI{25}{\micro\meter}.
     }
     \label{fig:focalSizes}
 \end{figure}
@@ -648,84 +666,190 @@ We remark that these thee cases have in common that the $f_1$ value in use is cl
 
 \subsection{Further simulations}
 
-The simulations presented here are motivated by the ID18 project but the optical layout has been simplified to the minimum necessary to study the effect of pairing two transfocators. A more complete study including the other optical elements, other transfocator considerations will be presented elsewhere, also for different energies and implementing the effect of surface errors due to thermal load and surface finish. It is however interesting to briefly mention here some results of this study to give a more complete vision of other relevant parameters to consider.
+The simulations presented here are motivated by the ID18 project but the optical layout has been simplified to the minimum necessary to study the effect of pairing two transfocators. A more complete study including the other optical elements, other transfocator configurations will be presented elsewhere, also for different energies and implementing the effect of surface errors due to thermal load and surface finish. It is however interesting to briefly mention here some results of this study to give a more complete vision of other relevant parameters to consider.
 
-\subsubsection{Transmitted flux.} We have limited our study to the focal sizes, but it can be complemented with focal flux. At \SI{7}{keV}, the undulator in the configuration selected emits a flux of 1.5 10$^{15}$ photons/s/0.1\%bw. Each of the three elements studied (slit, lens -1 and lens-2) absorb part of the flux. The estimation of the absorption by the slit can be done using simple geometrical arguments, and the absorption by the slits depend on the average Be thickness presented to the beam. The linear attenuation coefficient of Be at 7 keV is $\mu=$~\SI{3}{\centi\meter$^{-1}$}, giving 1.45\% attenuation for a \SI{50}{\micro\meter} thick layer (like lens thickness used in simulations\footnote{In the simulations the horizontal and vertical focusing are separated in two lenses, woth accumulated thickness \SI{100}{\micro\meter} thus absorption 3\%}). For the case 1 simulations we extracted the absorption for the different absorbing elements (slit, lens-1 and lens-2) in the case of partial coherence and also for full coherence (see Table~\ref{table:absorption}).
+\subsubsection{Transmitted flux.} We have limited our study to the focal sizes, but it can be complemented with focal flux. At \SI{7}{keV}, the undulator in the configuration selected emits a flux of 1.5 10$^{15}$ photons/s/0.1\%bw. Each of the three elements studied (slit, lens -1 and lens-2) absorb part of the flux. The estimation of the absorption by the slit can be done using simple geometrical arguments, and the absorption by the slits depend on the average Be thickness presented to the beam. The linear attenuation coefficient of Be at 7 keV is $\mu=$~\SI{3}{\centi\meter$^{-1}$}, giving 1.45\% attenuation for a \SI{50}{\micro\meter} thick layer (like lens thickness used in simulations\footnote{In the simulations the horizontal and vertical focusing are separated in two lenses, with accumulated thickness \SI{100}{\micro\meter} thus absorption 3\%}). For the case 1 simulations we extracted the absorption for the different absorbing elements (slit, lens-1 and lens-2) in the case of partial coherence and also for full coherence (see Table~\ref{table:absorption}).
 
 There is excellent agreement for partial coherence. For full coherence, the Wofry1D results are different than the SRW+Hybrid, because the geometry of the 1st coherent mode used to represent the full coherent beam is not the same as the geometry of the filament beam (used in SRW and Hybrid). We note a high absorption in lens-2, due to the fact that in this case the lens-2 is overilluminated, therefore the \SI{1}{\milli\meter} physical aperture absorbs considerably the beam.
 
-% CASE 1 PARTIAL COH Absorption slit, lens1, lens2 : 97.6, 7.9, 50.7 
+
+% WOFRY1D
 % CASE 1 FULL COH Absorption slit, lens1, lens2 : 87.0, 7.6, 48.3 
-% CASE 2 PARTIAL COH Absorption slit, lens1, lens2 : 97.6, 7.0, 3.9 
+% CASE 1 PARTIAL COH Absorption slit, lens1, lens2 : 97.6, 7.9, 50.7 
 % CASE 2 FULL COH Absorption slit, lens1, lens2 : 87.0, 6.7, 3.8 
+% CASE 2 PARTIAL COH Absorption slit, lens1, lens2 : 97.6, 7.0, 3.9 
+
+% CASE 3 FULL COH Absorption slit, lens1, lens2 : 55.9, 5.4, 17.1 
+% CASE 3 PARTIAL COH Absorption slit, lens1, lens2 : 89.5, 6.3, 23.4 
+% CASE 4 FULL COH Absorption slit, lens1, lens2 : 55.9, 6.8, 3.6 
+% CASE 4 PARTIAL COH Absorption slit, lens1, lens2 : 89.5, 8.0, 3.8 
+
 \begin{table}[]
     \label{table:absorption}
-    \caption{Comparison of beam intensity attenuation in percent by the slit, lens-1 and lens-2 for the coherent beam (first coherent mode in Wofry1D, filament beam in SRW, zero emittance in Hybrid) and for the partial coherent beam.
+    \caption{Comparison of beam intensity attenuation in percent by the slit, lens-1 and lens-2 for the partial coherent beam, 
+    % coherent beam (first coherent mode in Wofry1D, filament beam in SRW, zero emittance in Hybrid) and for the partial coherent beam,
+    for the four cases studied.
     The Wofry1D data shown here comes after combining the horizontal and vertical wavefronts using the outer product. 
-    \todo{remove this table? Or, complete it with the other cases? It is just for checking...}
     }
     \centering
-    
-    \begin{tabular}{c|c|c|c|c}
-case  & 
-coherence &
-Wofry1D & 
-% COMSYL & 
-SRW  & 
-Hybrid \\
-1   &  full &
-% no after-lens slit 87.0, 5.4, 18.8 &
-87.0, 7.6, 48.3 &
-% 84.8,6.1,22.6  & 
-96.6, 7.4, 51.3 & 
-96.7, 5.2, 53.0 \\
-1     &  partial &
-% no after-lens slit \inblue{97.6,  5.6 , 51.9}
-97.6,  7.9 , 50.7 &
-%  & 
-97.6,  7.6 , 51.0  &
-97.2, 5.2, 52.6\\
-2     &  full & 
-87.0, 4.6, 5.5  & 
-% 84.8,4.9,3.4  &
-96.6,6.4,3.7 &
-96.7, 4.3, 3.3 \\
-3     &  full & 
-55.9, 4.4, 9.7 & 
-% 52.7,4.2,9.6 & 
-86.0,6.11,22.7 &
-85.6, 4.7, 26.6 \\
-4     &  full & 
-55.9, 5.8, 4.6 & 
-% 52.7,5.5,3.6 &
-86.0,7.73,3.6 &
-85.6, 6.4, 3.6
-    \end{tabular}
-    
-    
+\begin{tabular}{l|lll|lll|lll}
+case & \multicolumn{3}{c|}{slit} & \multicolumn{3}{c|}{lens-1} & \multicolumn{3}{c|}{lens-2} \\
+\hline
+     & \rot{Wofry1D} & \rot{SRW} & \rot{Hybrid}
+     & \rot{Wofry1D} & \rot{SRW} & \rot{Hybrid}
+     & \rot{Wofry1D} & \rot{SRW} & \rot{Hybrid}
+\\
+\hline
+%    &          &      &        &          &      &         &          &       &         \\
+%1      &   87.0   & 96.6 & 96.7   & 7.6      & 7.4  & 5.2     & 48.3     & 51.3  & 53.0   \\
+1       &   97.6   & 97.6 & 97.2   & 7.9      & 7.6  & 5.2     & 50.7     & 51.1  & 52.6   \\
+% 2c    &   87.0   & 96.6 & 96.7   & 6.7      & 6.4  & 4.3     & 3.8      & 3.7   & 3.3    \\
+2       &   97.6   & 97.6 & 97.2   & 7.0      & 6.6  & 4.3     & 3.9      & 3.7   & 3.3    \\
+% 3c    &   55.9   & 86.0 & 85.6   & 5.4      & 6.11 & 4.7     & 17.1     & 22.7  & 26.6   \\
+3       &   89.5   & 90.2 & 88.6   & 6.3      & 6.1  & 4.6     & 23.4     & 21.8  & 25.2   \\
+% 4c    &   55.9   & 86.0 & 85.6   & 6.8      & 7.73 & 6.4     & 3.6      & 3.6   & 3.6    \\
+4       &   89.5   & 90.2 & 88.6   & 8.0      & 7.7  & 6.2     & 3.8      & 3.6  & 3.6   \\
+\end{tabular}
 \end{table}
+    
 
-\subsubsection{Correction of thermal deformations}
-\todo{PHILIPP: review this section}
-The heat load affect several elements of the beamline. The most relevant ones (primary slits, white beam mirrors, and double-crystal monochromators) are not described nor considered in this work. Finite element analysis of these elements as done for other EBS beamlines \cite{Brumund} demonstrate that the deformation originated by heat load can be decomposed it two parts: an average bending that is possible to correct by a small readjustment of the focal length of the optical elements downstream the heated element, and ``residual slope error" which remain after removing the averaged bending radius, and cannot be corrected unless using adaptive optics. We have simulated with Wofry1D the effect of the surface deformation produced in the first crystal of a monochromator placed just after the slit. The deformation profile calculated by FEA \todo{I USED FILE: SRC\_Si\_3.0mrad\_08000eV\_mo\_Si111\_Size1\_nodalOut.out} is is loaded in a ``mirror-like" element in Wofry, as described \cite{srioLBL}. For case 1, a small degradation in the horizontal direction is found (passing from \SI{8.09}{\micro\meter} to \SI{10.21}{\micro\meter} for the first coherent mode). It is accompanied by a loss of symmetry. A large deformation in the vertical spot is observed, but a spot close to the ideal is found when a best circle is subtracted from the profile. It is then possible to correct this added curvature. Indeed, by adjusting $f_2$ \todo{I will calculate this} it is possible to compensate the effects introduced by the crystal bending due to heat load.
-\todo{PHILIPP: Is possible (and reasonable) to calculate the deformation for \SI{7}{keV} with the coherent slits that we are using in case 1?}   
+% \begin{table}[]
+%     \label{table:absorptionOLD}
+%     \caption{Comparison of beam intensity attenuation in percent by the slit, lens-1 and lens-2 for the coherent beam (first coherent mode in Wofry1D, filament beam in SRW, zero emittance in Hybrid) and for the partial coherent beam.
+%     The Wofry1D data shown here comes after combining the horizontal and vertical wavefronts using the outer product. 
+%     \todo{remove this table? Or, complete it with the other cases? It is just for checking...}
+%     }
+%     \centering
+    
+%     \begin{tabular}{c|c|c|c|c}
+% case  & 
+% coherence &
+% Wofry1D & 
+% % COMSYL & 
+% SRW  & 
+% Hybrid \\
+% 1   &  full &
+% % no after-lens slit 87.0, 5.4, 18.8 &
+% 87.0, 7.6, 48.3 &
+% % 84.8,6.1,22.6  & 
+% 96.6, 7.4, 51.3 & 
+% 96.7, 5.2, 53.0 \\
+% 1     &  partial &
+% % no after-lens slit \inblue{97.6,  5.6 , 51.9}
+% 97.6,  7.9 , 50.7 &
+% %  & 
+% 97.6,  7.6 , 51.0  &
+% 97.2, 5.2, 52.6\\
+% 2     &  full & 
+% 87.0, 4.6, 5.5  & 
+% % 84.8,4.9,3.4  &
+% 96.6,6.4,3.7 &
+% 96.7, 4.3, 3.3 \\
+% 3     &  full & 
+% 55.9, 4.4, 9.7 & 
+% % 52.7,4.2,9.6 & 
+% 86.0,6.11,22.7 &
+% 85.6, 4.7, 26.6 \\
+% 4     &  full & 
+% 55.9, 5.8, 4.6 & 
+% % 52.7,5.5,3.6 &
+% 86.0,7.73,3.6 &
+% 85.6, 6.4, 3.6
+%     \end{tabular}
+% \end{table}
+
+\subsubsection{Accuracy of the focal position and depth of focus}
+\label{sec:caustic}
+
+We have calculated the beam evolution in the neighbourhood of the sample position for the four cases studied (see Fig.~\ref{fig:caustic}). From these plots one can obtain the position of the best focus and the depth of focus.
+
+It can be observed sometimes a mismatch between the position of the best focus and its expected position (the sample position, at the zero abscissas). This is due to an error in the calculations of $f_2$ and may have several origins, which are interesting to discuss. 
+
+For pairing two transfocators, the algorithm chosen to calculate the $f_2$ value consist in analyzing the wavefront at the lens-2 position, find a corrector refractive object that would transform the incoming wavefront in a cylindrically convergent wavefront (see section \ref{sec:refractorCorrector}), and fit the radius at the center. We then get the $R_2$ and therefore the $f_2$ value. In addition, to obtain smooth $(f_1,f_2)$ curves in Fig.~\ref{fig:f1f2map} we have used a Gaussian slit (see section \ref{sec:gaussianslit}). This smears out the diffraction fringes, because in an ideallized system where a point source is focused at the sample position, the recorded intensity would correspond to the diffraction pattern of the slit, that can be considered as an "object" placed in the beam (see e.g. \cite{paganin_book}). The use of a Gaussian object implies that its diffraction pattern is a Gaussian with no diffraction fringes. 
+
+For some cases (1h, 1v, 3h) in Fig.~\ref{fig:caustic} there is a quite good agreement between the focal position obtained from the maximum of intensity on-axis (plotted at the top of the image) and our expected position (the zero in the plots). In some other cases (2v, 3h, 4h) the agreement is acceptable, taking into account that the depth of focus can be quite large (of the order of meters). A small correction in $f_2$ would bring the best focus to its ideal position. This correction is necessary because we used a Gaussian slit for calculating the $(f_1,f_2)$ curves and we neglected some oscillations around the curves shown that appear if no Gaussian apodizzation were done. Unfortunately, there are two pathological cases where the algorithm used to calculate $f_2$ did not succeed: the cases 2h and 4v.
+The $f_2$ error in 2h is also due to the oscillations in the $(f_1,f_2)$ and can be corrected, as shown in Fig.~\ref{fig:causticcorrection}. However, case 4v cannot be corrected because we would need a divergent lens to bring the focus of $f_1$ to the sample position \todo{check}. Setting $R_2=f_2=\infty$ would reduce the beam size at the sample position, but cannot get the best focus there. However, an ad-hoc defined refractive corrector in the place of lens-2 would do the job.  
+
+
+
+
+
+\begin{figure}\label{fig:caustic}
+\centering
+
+\includegraphics[width=0.49\textwidth]{figures/case1h_caustic.png}
+\includegraphics[width=0.49\textwidth]{figures/case1v_caustic.png}
+
+\includegraphics[width=0.49\textwidth]{figures/case2h_caustic.png}
+\includegraphics[width=0.49\textwidth]{figures/case2v_caustic.png}
+
+\includegraphics[width=0.49\textwidth]{figures/case3h_caustic.png}
+\includegraphics[width=0.49\textwidth]{figures/case3v_caustic.png}
+
+\includegraphics[width=0.49\textwidth]{figures/case4h_caustic.png}
+\includegraphics[width=0.49\textwidth]{figures/case4v_caustic.png}
+
+\caption{Evolution of the beam size in the around the sample position for the cases listed in Table~\ref{table:2Dusercases}. The top and side graphs correspond to the profiles passing by (0,0).
+}
+\end{figure}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\begin{figure}\label{fig:causticcorrection}
+\centering
+
+
+\includegraphics[width=0.49\textwidth]{figures/case2h_caustic.png}
+\includegraphics[width=0.49\textwidth]{figures/case4v_caustic.png}
+\includegraphics[width=0.49\textwidth]{figures/case2hRefined_caustic.png}
+\includegraphics[width=0.49\textwidth]{figures/case4vRefined_caustic.png}
+\includegraphics[width=0.49\textwidth]{figures/case2hCorrector_caustic.png}
+\includegraphics[width=0.49\textwidth]{figures/case4vCorrector_caustic.png}
+
+\caption{Evolution of the beam size in the around the sample position for the ``pathological" case 2h and 2v (listed in Table~\ref{table:2Dusercases}). Top row: uncorrected profiles (as in Fig.~\ref{fig:caustic}), central row: with corrected lens $R_2$=\SI{410}{\micro\meter} ($f_2=$\SI{29.4}{\meter}) for case 2h and $R_2=f_2=\infty$ for case 4v, botton row: using a free-form refractive corrector instead of lens-2.
+}
+\end{figure}
+
+
+
+\subsubsection{Errors in optical surfaces}
+
+The performance of X-ray optics in the new generation synchrotron beamlines is limited by the quality of the optical surfaces \cite{lengeler1999,Yabashi}. Slope and height errors are often associated with surface finishing (higher spatial frequency), while figure errors are often associated with lower frequency deviations from ideal profile (e.g. bending, gravity sag, thermal deformations) \cite{srio1992, signorato1997}. Figure errors in x-ray lenses can be measured by different techniques (eg. grating interferometry, x-ray speckle tracking or ptychography) and readily included in the simulations \cite{celestre2020}. Some profiles measured at ESRF using x-ray speckle tracking \cite{berujon2020} with height error RMS of the order of \SI{1}{\micro\meter} are used to verify that the focal spot produced by lenses with realistic errors is not degraded with respect to the ideal lens surface. 
+
+
+% Usually the optics of new generation synchrotron beamlines is limited by the quality of the optical surface. Typically are due to surface finish (slope errors and height errors) and shape errors, often due to heat load. 
+% \todo{Rafael, would you please work next paragraph. I checked that your error file (profile 1 in DABAM2D) does not produce relevant changes, thus the odea is to "mention" the errors without presenting a full study.} Surface errors in lens surfaces can be experimentally measured by different techniques (e.g. speckle tracking, ptychography) and included in the simulations. Some profiles measured at ESRF \cite{???} with height error RMS of the order of \SI{1}{\micro\meter}  are used to verify that the focal spot produced by lenses with realistic errors is not degraded with respect to the ideal lens surface. 
+
+\todo{Juan, please read!} The effect of finish surface errors in the white double-mirror system is also analyzed using a measured mirror meridional profile of \SI{2.5}{\nano\meter} height error RMS and \SI{140}{\nano\radian} RMS slope error. 
+
+\todo{Philipp, please read!} The heat load affect several elements of the beamline. For the beamline under consideration, the affected elements (white beam mirrors, and double-crystal monochromators) are not presented in our simulations. Finite element analysis of mirrors and crystals done for other EBS beamlines \cite{Brumund} show that the deformation height profile can be decomposed it two parts: an average bending that is possible to correct by a small readjustment of the focal length of the optical elements downstream the heated element, and a ``residual error" which remain after removing the averaged bending radius, and could only be corrected using adaptive optics. Wofry1D simulations using FEA-generated deformations at the first crystal of a monochromator placed just after the coherent slit showed no significant degradation of the focal spot, both in size and shape. This is mainly due to the low power transmitted by the coherent slit.We checked that the focused beam is almost unchanged when using a profile from FEA analysis with curvature of about \SI{1}{\kilo\meter} and residual slope errors of \SI{30}{\nano\radian}. 
+
+
+
+% The deformation profile calculated by FEA \todo{I USED FILE: SRC\_Si\_3.0mrad\_08000eV\_mo\_Si111\_Size1\_nodalOut.out} is is loaded in a ``mirror-like" element in Wofry, as described \cite{srioLBL}. For case 1, a small degradation in the horizontal direction is found (passing from \SI{8.09}{\micro\meter} to \SI{10.21}{\micro\meter} for the first coherent mode). It is accompanied by a loss of symmetry. A large deformation in the vertical spot is observed, but a spot close to the ideal is found when a best circle is subtracted from the profile. It is then possible to correct this added curvature. Indeed, by adjusting $f_2$ \todo{I will calculate this} it is possible to compensate the effects introduced by the crystal bending due to heat load.
 
 \subsubsection{Selection of the transfocator configuration.} 
-The results presented in this paper idealizes the transfocator with two orthogonal single lenses, each one focusing one direction (horizontal of vertical), with parabolic profiles and apex radii adjusted for the wanted focal length (via the usual $f=R/(2 N \delta$). The real transfocator will use a combination of one or several lenses to give a similar radius of curvature  ($R^{-1} = R_1^{-1} + R_2^{-1} + ...$). A combination of 2D lenses matching the higher radius would be combined with 1D lenses to correct the radius of the direction that requires a shorter focal distance. This combination, however, never match perfectly the exact focal distances. The real system will produce a focal position close to the exact focal position at sample location, and it will show different absorption due to the accumulated thickness of the used lenses. For example, the lens radii for case \todo{calculate and discuss shift of focus}. The empty space in between the lenses has also been neglected, a good approximation unless effects of ``adiabatic" focusing are considered, important only when working with nanometric focii.    
+The results presented in this paper idealizes the transfocator with two orthogonal single lenses, each one focusing one direction (horizontal of vertical), with parabolic profiles and apex radii adjusted for the wanted focal length (via the usual $f=R/(2 N \delta$). The real transfocator will use a combination of one or several lenses to give a similar radius of curvature  ($R^{-1} = R_1^{-1} + R_2^{-1} + ...$). Two independent transfocators can be used for focusing independently the horizontal and vertical planes. Also, combination of 2D lenses matching the higher radius could be combined with 1D lenses to correct the radius of the direction that requires a shorter focal distance. The combinations of the lenses in the transfocator will not match perfectly the exact focal distances, thus producing a focal position close to the exact focal position at sample location. Depending on the used lenses, a different absorption is due to the accumulated thickness of the individual lenses. For example, the lens radii for case 4 can be obtained in using 2D lenses adjusted to focus in vertical (three lenses with $R_1=$~\SI{5}{\milli\meter}, $R_2=$~\SI{2}{\milli\meter} and $R_3=$~\SI{1}{\milli\meter} to get $R=$~\SI{0.588}{\milli\meter}) then adding two more 1D lenses to adjust the horizontal ($R_1=$~\SI{5}{\milli\meter} and $R_1=$~\SI{1}{\milli\meter} to get $R=$~\SI{0.345}{\milli\meter}, values very close to the exact values from Table~\ref{table:2Dusercases}. We simulated this configuration and got similar profiles than the case studied previously, with small differences in FWHM (10\% or less) and obviously more absorption. The empty space in between the lenses is neglected, which is a good approximation unless effects of ``adiabatic" focusing are expected, which may be the case for sub-micron focii.    
 
-\subsubsection{Off-resonance.}\todo{TO BE DONE} The simulations considered here where done for monochromatic radiation supposing the undulator tuned at the exact resonance (\SI{7}{keV}). At this position the photon source is small but may not have the maximum intensity. Effects of out-resonance may appear when i) a ``pink" or not strictly coherent beam is used (using for example multilayer monochromators or beamlines without monochromators), or ii) the undulator gap tuned by selecting the maximum of the intensity in a small aperture, corresponding to an energy value a bit lower (red-shifted) than exact resonance. Being out-of resonance has an important impact in coherence fraction. The CMD implemented in Wofry1D is not restricted to the resonance energy. 
-\todo{We have simulated a source that is XX\% red-shifted for case 1, and we obtained...}
+\subsubsection{Off-resonance.} The simulations considered here where done for monochromatic radiation supposing the undulator tuned at the exact resonance (\SI{7}{keV}). This photon energy may not exactly correspond to the maximum of the emitted flux. Somme effects of out-resonance may appear when i) a ``pink" or not strictly monochromatic beam is used (in beamlines without monochromator or also using a high-band monochomator, as for example using multilayer), or ii) the undulator gap tuned by selecting the maximum of the intensity in a given aperture, thus corresponding to an energy value a bit lower (red-shifted) than exact resonance. The separation from the position of the maximum of intensity to the resonant energy increases when increasing the observation slit. In our case, this beamline will use a slit small enough to gain coherence, which implies that the maximum of the intensity is well approximated by the resonance energy, and it will use a crystal monochromator thus the beam can be considered as monochromatic, thus off-resonance effects are not appreciated. This has been checked numerically by averaging the intensity distribution at the sample position when scanning the photon energy around the resonance value ($7\pm0.1$~keV).   \todo{suppress this paragraph?}
 
-\subsubsection{The measurement of coherence.} In this paper we measured the beam coherence using the CF. This parameter has a strict definition in the context of the CMD: CF is the occupation of the first coherent mode ($\eta_0$ in Eq.~\ref{eq:occupation}). We always verify that this strict definition give values close to the approximated CF  calculated as the phase space dimension ratio between the coherent undulator emission (zero emittance) over the convolution of the electron beam phase space and the undulator emission. The CMD gives also the possibility of propagating the modes and also recalculate the CF after the slit or other optical elements. The coherence slit selects the wanted coherence (90\% for cases 1 and 2; or 70\% for cases 3 and 4 in our study) but the absorption of the lenses can also increase a bit more the coherence at the sample: $CF_h=$~94, 94, 77, 77 $CF_v=$~97, 90, 77, 71 for cases 1, 2, 3 and 4, respectively. 
 
-Other common parameters to define the coherence are the degree of coherence and coherence length. The degree of (transversal) coherence is not a scalar but a function (see Eq.~\ref{eq:DTC}. The coherence length has not a strict definition and it is usually given as the ``width" of some cut of the coherence degree. In the framework of CMD, it is more practical to use the CF as a measure of the coherence. However, a good idea of the coherence length at a given position along the beamline is given by the FWHM of the first coherence mode (given in brackets in Table~\ref{table:comparison} for the four cases studied).    
+\subsubsection{The measurement of coherence.} We measured the beam coherence using the coherent fraction $CF$, an idea introduced by \citeasnoun{glass2017}. This parameter has a strict definition in the context of the CMD: $CF$ is the occupation of the first coherent mode ($\eta_0$ in Eq.~\ref{eq:occupation}). We verified that this strict definition give values close to the approximated CF  calculated as the phase space dimension ratio between the coherent undulator emission (zero emittance) over the convolution of the electron beam phase space and the undulator emission. The CMD gives also the possibility of propagating the modes and also recalculate the $CF$ after the slits and optical elements. The coherence slit selects the wanted coherence (90\% for cases 1 and 2; or 70\% for cases 3 and 4 in our study) but the absorption of the lenses can also increase a bit more the coherence at the sample: $CF_h=$~94, 94, 77, 77 $CF_v=$~97, 90, 77, 71 for cases 1, 2, 3 and 4, respectively. 
 
-\subsubsection{Practical considerations} Simulations like those presented here could be very beneficial for beamline operation, for its optimization and quick setting.  Complicated  relationships exist between the beam parameters requested by users (beam size and coherent fraction) and the beamline configuration (undulator, slit and transfocator setting). Quick simulations as done by Wofry1D could be a helpful instrument for the beamline staff to get the desired configurations. The plots shown here (e.g., CF vs slit size in Fig.~\ref{fig:cf_vs_aperture}, trajectories in Fig.~\ref{fig:f1f2map}, or final size in Fig.~\ref{fig:focalSizes} could be simulated on-line and compared with results presented as look-up tables with similar aspect. We are considering the design of a Digital twin that mimics the real transfocator systems to assist beamline setting. For that, the fast simulation using the CMD method developed in Wofry1D will be an integrated component.  
+Other common parameters to define the coherence are the degree of coherence and coherence length. The degree of (transversal) coherence is not a scalar but a function (see equation~\ref{eq:DTC}. The coherence length has not a strict definition and it is usually given as the ``width" of some cut of the coherence degree. We found more intuitive and practical to use the $CF$ as a measure of the coherence. However, a good idea of the coherence length at a given position along the beamline is also given by the FWHM of the first coherence mode (given in brackets in Table~\ref{table:comparison} for the four cases studied).    
+
+
+% finding focus https://www.optikos.com/finding-focus/
+\subsubsection{Practical considerations} Simulations like those presented here could be very beneficial for beamline operation, for its optimization and quick setting.  Complicated  relationships exist between the beam parameters requested by users (beam size and coherent fraction) and the beamline configuration (undulator, slit and transfocator setting). Quick simulations as done by Wofry1D could be a helpful instrument for the beamline staff to get the desired configurations. The plots shown here (e.g., $CF$ vs slit size in Fig.~\ref{fig:cf_vs_aperture}, trajectories in Fig.~\ref{fig:f1f2map}, or final size in Fig.~\ref{fig:focalSizes} could be simulated on-line and compared with results presented as look-up tables with similar aspect. We are also considering the design of a digital twin that mimics the real transfocator systems to assist beamline setting. For that, the fast simulation using the CMD method developed in Wofry1D will be an integrated component.  
+
+Some practical consequences can be directly deduced from the results shown here. For example, looking at Fig.~\ref{fig:focalSizes} one can observe that the same focal size can be obtained with different configurations. To get a similar size, it is better to prefer a large $f_1$ to avoid over-illuminating the lens-2 and increase transmission of lens-1. The transfocator design is simplified if we restrict the horizontal focal distance t to be smaller than the vertical $f_h>f_v$. Here, $f_v$ can be obtained with lenses focusing in 2D and $f_h$ by adding 1D lenses focusing in the horizontal plane. 
+
+% https://www.optikos.com/finding-focus/
+In this work we configured the transfocator to have the resulting focal position on the sample plane, an "in-focus" setup. It could also be possible to work off-focus to vary the beam size at the sample plane. The in-focus setup will generally produce the sharpest image of very small details in the image. Moreover, it will reduce the artifacts produced by the surface finish errors. Also, a larger depth of focus is obtained at this position. To check that, we have propagated the beam at distances close to the focus to see the effect (see Fig. XX). We observe...
+
 
 \todo{because of the system complexity it would be good to have an experimental method to guarantee that the focus sit on the image plane (so we are not out of focus)}
-
-Some practical consequences can be directly deduced from the results shown here. For example, looking at Fig.~\ref{fig:focalSizes} one can observe that the same focal size can be obtained with different configurations. To get a similar size, it is better to prefer a large $f_1$ to avoid over-illuminating the lens-2 and increase transmission of lens-1.
-
 
 % \todo{MOVE TO DISCUSSION? This degradation of the focal dimension when focal position cannot be predicted by the geometrical optics adds difficulty to the design of optical systems: the slit must be closed enough to guarantee a good coherence, but opened enough to maintain the focal position not far from that of the geometrical optics.}
 
@@ -737,7 +861,7 @@ We have studied in detail the focusing of a partial coherent beam (as produced b
 
 We calculated numerically the map or trajectory of focal distances $(f_1,f_2)$ needed to maintain the focus at the image plane. The beam size values obtained for different cases are very different than those predicted by geometrical optics.  
 
-Numerical calculations for this work have been done using a newly developed method of coherent mode decomposition in 1D. This method is very fast, and many simulations can be run in a laptop, therefore it is ideal for parametric calculations as presented here. This method is available in the Wofry add-on of the OASYS suite \cite{codeOASYS}. Four cases are calculated and compared using the other methods available in OASYS, like the full 2D coherent mode decomposition using COMSYL \cite{codeCOMSYL}, the OASYS interface for the SRW \cite{codeSRW} code, and hybrid ray tracing \cite{codeHYBRID}. OASYS workspaces for the simulations performed in this paper are available at {\tt https://github.com/oasys-esrf-kit/...} 
+Numerical calculations for this work have been done using a newly developed method of coherent mode decomposition in 1D. This method is very fast, and many simulations can be run in a laptop, therefore it is ideal for parametric calculations as presented here. This method is available in the Wofry add-on of the OASYS suite \cite{codeOASYS}. Four cases are calculated and compared using the other methods available in OASYS, like the full 2D coherent mode decomposition using COMSYL \cite{codeCOMSYL}, the OASYS interface for the SRW \cite{codeSRW} code, and hybrid ray tracing \cite{codeHYBRID}. OASYS workspaces for the simulations performed in this paper are available at \cite{repository}.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
