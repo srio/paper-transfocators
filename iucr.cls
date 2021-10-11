@@ -7515,7 +7515,7 @@
 % set up requires that it be instantiated in some hidden way like this:
 % undoubtedly a subtle bug, but this provides a workaround for current
 % dictionaries
-\gdef\RHUBARB{\smash{$\phantom{\_}$}}%
+\gdef\RHUBARB{\hbox{\smash{$\phantom{\_}$}}}%
   \RHUBARB% % hack - see above
 \def\DATA#1{%
   \baselineskip10pt%
